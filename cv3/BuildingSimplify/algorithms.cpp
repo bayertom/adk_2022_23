@@ -1,4 +1,6 @@
 #include "algorithms.h"
+#include "sortpointsbyy.h"
+#include "sortpointsbyx.h"
 
 Algorithms::Algorithms()
 {
@@ -48,4 +50,36 @@ double Algorithms::getTwoLinesAngle(QPointF &p1,QPointF &p2,QPointF &p3,QPointF 
     double vu = sqrt(vx*vx+vy*vy);
 
     return acos(dot/(nu*vu));
+}
+
+QPolygonF Algorithms::createCH(QPolygonF &pol)
+{
+    //Create convex hull using Jarvis algorithm
+    QPolygonF ch;
+
+    //Search for pivot
+    QPointF q = *std::min_element(pol.begin(), pol.end(), SortPointsByY());
+
+    // Add point to CH
+    ch.push_back(q);
+
+    // Search for pivot (x)
+    QPointF p = *std::min_element(pol.begin(), pol.end(), SortPointsByX());
+
+    //Create r
+    QPointF r(p.x(),q.y());
+
+    // Assign points to r-pjj, q-pj
+    QPointF pjj = r;
+    QPointF pj = q;
+
+    // Find all points of convex hull
+    do {
+        // Supplementary variables
+        int imax = -1;
+        double omax = 0;
+    } while (pj!=q);
+
+
+
 }
