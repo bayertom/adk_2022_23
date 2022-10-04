@@ -5,7 +5,7 @@
 class Algorithms
 {
 public:
-    Algorithms();
+    Algorithms(){};
 
     int getPointLinePosition(QPointF &p1, QPointF &p2, QPointF &q);
     double getTwoLinesAngle(QPointF &p1,QPointF &p2,QPointF &p3,QPointF &p4);

@@ -1,10 +1,6 @@
 #include <cmath>
 #include "algorithms.h"
 
-Algorithms::Algorithms()
-{     
-}
-
 int Algorithms::getPointLinePosition(QPointF &p1, QPointF &p2, QPointF &q)
 {
     //Analyze point and line position
@@ -58,7 +54,8 @@ int Algorithms::getPointAndPolygonPosition(QPointF &q, QPolygonF &pol)
     double xir = pol[0].x() - q.x();
     double yir = pol[0].y() - q.y();
 
-    for (int i = 1; i < n; i++)
+    //Process all vertices
+    for (int i = 1; i <= n; i++)
     {
         //Reduces coordinates
         double x2ir = pol[i%n].x() - q.x();

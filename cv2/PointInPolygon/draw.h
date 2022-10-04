@@ -8,6 +8,8 @@ class Draw : public QWidget
     Q_OBJECT
 
 private:
+    bool mode;
+    QPointF q;
     QPolygonF pol;
 
 public:
@@ -16,6 +18,8 @@ public:
     void paintEvent(QPaintEvent *event);
     void clearScreen();
     QPolygonF getPolygon(){return pol;}
+    void changeMode();
+    QPointF getPoint(){return q;}
 
 signals:
 

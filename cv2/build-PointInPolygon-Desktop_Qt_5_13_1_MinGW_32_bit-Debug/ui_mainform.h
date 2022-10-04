@@ -29,6 +29,8 @@ public:
     QVBoxLayout *verticalLayout;
     QPushButton *pushButton;
     QSpacerItem *verticalSpacer_2;
+    QPushButton *pushButton_4;
+    QSpacerItem *verticalSpacer_4;
     QPushButton *pushButton_2;
     QLabel *label;
     QSpacerItem *verticalSpacer;
@@ -62,6 +64,15 @@ public:
         verticalSpacer_2 = new QSpacerItem(20, 28, QSizePolicy::Minimum, QSizePolicy::Expanding);
 
         verticalLayout->addItem(verticalSpacer_2);
+
+        pushButton_4 = new QPushButton(MainForm);
+        pushButton_4->setObjectName(QString::fromUtf8("pushButton_4"));
+
+        verticalLayout->addWidget(pushButton_4);
+
+        verticalSpacer_4 = new QSpacerItem(20, 40, QSizePolicy::Minimum, QSizePolicy::Expanding);
+
+        verticalLayout->addItem(verticalSpacer_4);
 
         pushButton_2 = new QPushButton(MainForm);
         pushButton_2->setObjectName(QString::fromUtf8("pushButton_2"));
@@ -99,6 +110,7 @@ public:
     {
         MainForm->setWindowTitle(QCoreApplication::translate("MainForm", "Point in polygon", nullptr));
         pushButton->setText(QCoreApplication::translate("MainForm", "Load file", nullptr));
+        pushButton_4->setText(QCoreApplication::translate("MainForm", "Switch mode", nullptr));
         pushButton_2->setText(QCoreApplication::translate("MainForm", "Analyze position", nullptr));
         label->setText(QString());
         pushButton_3->setText(QCoreApplication::translate("MainForm", "Clear", nullptr));

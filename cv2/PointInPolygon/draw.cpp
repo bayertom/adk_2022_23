@@ -4,8 +4,12 @@
 
 Draw::Draw(QWidget *parent) : QWidget(parent)
 {
+    mode = true;
+    q.setX(100);
+    q.setY(100);
 
 }
+
 
 void Draw::mousePressEvent(QMouseEvent *event)
 {
@@ -13,11 +17,21 @@ void Draw::mousePressEvent(QMouseEvent *event)
     double x = event->pos().x();
     double y = event->pos().y();
 
-    //Create new point
-    QPointF p(x, y);
+    //Add to polygon
+    if(mode){
 
-    //Add as a new vertex
-    pol.push_back(p);
+        //Create new point
+        QPointF p(x, y);
+
+        //Add as a new vertex
+        pol.push_back(p);
+    }
+
+    // Shift point
+    else {
+        q.setX(x);
+        q.setY(y);
+    }
 
     //Repaint screen
     repaint();
@@ -35,6 +49,10 @@ void Draw::paintEvent(QPaintEvent *event)
     //Draw polygon
     painter.drawPolygon(pol);
 
+    //Draw point
+    double r = 5; //px
+    painter.drawEllipse(q.x()-r, q.y()-r, 2*r, 2*r);
+
     //End draw
     painter.end();
 }
@@ -46,3 +64,11 @@ void Draw::clearScreen()
 
     repaint();
 }
+
+void Draw::changeMode()
+{
+    // Switch mode: draw point/add vertex
+    mode = !mode;
+}
+
+
