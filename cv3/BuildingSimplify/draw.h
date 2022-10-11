@@ -9,13 +9,19 @@ class Draw : public QWidget
 
 private:
     QPolygonF building;
+    QPolygonF ch;
+    QPolygonF er;
 
 public:
     explicit Draw(QWidget *parent = nullptr);
     void mousePressEvent(QMouseEvent *event);
     void paintEvent(QPaintEvent *event);
 
-
+    QPolygonF getCH(){return ch;}
+    QPolygonF getMAER(){return er;}
+    QPolygonF getBuild(){return building;}
+    void setCH(QPolygonF &ch_){ch=ch_;};
+    void setMAER(QPolygonF &er_){er=er_;};
 signals:
 
 public slots:

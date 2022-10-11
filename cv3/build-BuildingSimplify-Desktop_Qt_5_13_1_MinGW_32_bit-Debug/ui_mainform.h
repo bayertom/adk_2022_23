@@ -29,6 +29,8 @@ public:
     Draw *Canvas;
     QVBoxLayout *verticalLayout;
     QLabel *label;
+    QPushButton *pushButton_3;
+    QPushButton *pushButton_4;
     QComboBox *comboBox;
     QSpacerItem *verticalSpacer;
     QPushButton *pushButton;
@@ -58,6 +60,16 @@ public:
         label->setObjectName(QString::fromUtf8("label"));
 
         verticalLayout->addWidget(label);
+
+        pushButton_3 = new QPushButton(MainForm);
+        pushButton_3->setObjectName(QString::fromUtf8("pushButton_3"));
+
+        verticalLayout->addWidget(pushButton_3);
+
+        pushButton_4 = new QPushButton(MainForm);
+        pushButton_4->setObjectName(QString::fromUtf8("pushButton_4"));
+
+        verticalLayout->addWidget(pushButton_4);
 
         comboBox = new QComboBox(MainForm);
         comboBox->addItem(QString());
@@ -95,8 +107,10 @@ public:
 
     void retranslateUi(QWidget *MainForm)
     {
-        MainForm->setWindowTitle(QCoreApplication::translate("MainForm", "MainForm", nullptr));
+        MainForm->setWindowTitle(QCoreApplication::translate("MainForm", "Simplify Building", nullptr));
         label->setText(QCoreApplication::translate("MainForm", "Select method", nullptr));
+        pushButton_3->setText(QCoreApplication::translate("MainForm", "CH", nullptr));
+        pushButton_4->setText(QCoreApplication::translate("MainForm", "MAER", nullptr));
         comboBox->setItemText(0, QCoreApplication::translate("MainForm", "Minimum Area Rectangle", nullptr));
         comboBox->setItemText(1, QCoreApplication::translate("MainForm", "Wall Average", nullptr));
 

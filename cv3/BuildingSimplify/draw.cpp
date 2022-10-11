@@ -35,6 +35,14 @@ void Draw::paintEvent(QPaintEvent *event)
     //Draw polygon
     painter.drawPolygon(building);
 
+    //Draw convex hull
+    painter.setPen(Qt::red);
+    painter.drawPolygon(ch);
+
+    //Draw minimum area enclosing rectangle
+    painter.setPen(Qt::green);
+    painter.drawPolygon(er);
+
     //End draw
     painter.end();
 }
