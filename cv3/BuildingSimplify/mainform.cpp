@@ -39,6 +39,7 @@ void MainForm::on_pushButton_clicked()
     repaint();
 }
 
+
 void MainForm::on_pushButton_2_clicked()
 {
     //Clear all

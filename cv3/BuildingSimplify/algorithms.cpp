@@ -30,7 +30,6 @@ int Algorithms::getPointLinePosition(QPointF &p1, QPointF &p2, QPointF &q)
 
     // On the line
     return -1;
-
 }
 
 
@@ -194,9 +193,9 @@ QPolygonF Algorithms::minAreaEnclosingRectangle(QPolygonF &pol)
     double sigma_min = 0;
     auto [mmb_min, area_min] = minMaxBox(pol);
 
-            //Process all segments of CH
-            int n = ch.size();
-            for(int i = 0; i < n; i++)
+    //Process all segments of CH
+    int n = ch.size();
+    for(int i = 0; i < n; i++)
     {
         // Compute direction sigma
         double dx = ch[(i+1)%n].x() - ch[i].x();
@@ -209,8 +208,8 @@ QPolygonF Algorithms::minAreaEnclosingRectangle(QPolygonF &pol)
         // Find new MMB
         auto [mmb,area] = minMaxBox(pol_r);
 
-                // Update min MMB
-                if(area < area_min)
+        // Update min MMB
+        if(area < area_min)
         {
             mmb_min = mmb;
             area_min = area;
@@ -220,7 +219,6 @@ QPolygonF Algorithms::minAreaEnclosingRectangle(QPolygonF &pol)
 
     // Convert min MMB to MAER
     return rotate(mmb_min, sigma_min);
-
 }
 
 
@@ -248,24 +246,13 @@ QPolygonF Algorithms::resizeRectangle(QPolygonF &rec, double areaB)
     double u4x = rec[3].x() - xc;
     double u4y = rec[3].y() - yc;
 
-    // Resize of vectors
-    double u1xr = sqrt(k) * u1x;
-    double u2xr = sqrt(k) * u2x;
-    double u3xr = sqrt(k) * u3x;
-    double u4xr = sqrt(k) * u4x;
-
-    double u1yr = sqrt(k) * u1y;
-    double u2yr = sqrt(k) * u2y;
-    double u3yr = sqrt(k) * u3y;
-    double u4yr = sqrt(k) * u4y;
-
     // New coordinates of resized rectangle
-    QPointF v1r(xc + u1xr, yc + u1yr);
-    QPointF v2r(xc + u2xr, yc + u2yr);
-    QPointF v3r(xc + u3xr, yc + u3yr);
-    QPointF v4r(xc + u4xr, yc + u4yr);
+    QPointF v1r(xc + sqrt(k) * u1x, yc + sqrt(k) * u1y);
+    QPointF v2r(xc + sqrt(k) * u2x, yc + sqrt(k) * u2y);
+    QPointF v3r(xc + sqrt(k) * u3x, yc + sqrt(k) * u3y);
+    QPointF v4r(xc + sqrt(k) * u4x, yc + sqrt(k) * u4y);
 
-    //Create new polygon
+    //Create new rectangle
     QPolygonF err;
     err.push_back(v1r);
     err.push_back(v2r);
@@ -273,8 +260,8 @@ QPolygonF Algorithms::resizeRectangle(QPolygonF &rec, double areaB)
     err.push_back(v4r);
 
     return err;
-
 }
+
 
 QPolygonF Algorithms::resMinAreaEnclosingRectangle(QPolygonF &pol)
 {
@@ -289,6 +276,7 @@ QPolygonF Algorithms::resMinAreaEnclosingRectangle(QPolygonF &pol)
 
     return err;
 }
+
 
 QPolygonF Algorithms::wallAverage(QPolygonF &pol)
 {
@@ -311,19 +299,18 @@ QPolygonF Algorithms::wallAverage(QPolygonF &pol)
         // Direction differencies
         double d_sigmai = sigmai-sigma1;
 
-        //Correct quadrant
+        //Correct the quadrant
         if (d_sigmai < 0)
             d_sigmai +=2*M_PI;
 
         // Remainder
         double ki = round((2* d_sigmai) / M_PI);
-
         double ri = d_sigmai - ki*(M_PI/2);
 
         // Length of a segment
         double leni = sqrt(dxi*dxi + dyi*dyi);
 
-        //Weighted average
+        // Weighted average, remainder
         rAver += leni*ri;
         sumW  += leni;
     }
@@ -331,7 +318,7 @@ QPolygonF Algorithms::wallAverage(QPolygonF &pol)
     // Weighted average
     rAver /= sumW;
 
-    // Direction
+    // New direction
     sigma1 += rAver;
 
     // Rotate by -sigma
