@@ -15,6 +15,10 @@ public:
     double getArea(QPolygonF &pol);
     std::tuple<QPolygonF, double> minMaxBox(QPolygonF &pol);
     QPolygonF minAreaEnclosingRectangle(QPolygonF &pol);
+    QPolygonF resizeRectangle(QPolygonF &rec, double areaB);
+
+    QPolygonF resMinAreaEnclosingRectangle(QPolygonF &pol);
+    QPolygonF wallAverage(QPolygonF &pol);
 
 };
 

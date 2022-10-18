@@ -47,4 +47,11 @@ void Draw::paintEvent(QPaintEvent *event)
     painter.end();
 }
 
+void Draw::clearAll()
+{
+    building.clear();
+    er.clear();
+    ch.clear();
+
+}
 

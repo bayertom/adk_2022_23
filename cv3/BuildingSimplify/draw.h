@@ -21,7 +21,9 @@ public:
     QPolygonF getMAER(){return er;}
     QPolygonF getBuild(){return building;}
     void setCH(QPolygonF &ch_){ch=ch_;};
-    void setMAER(QPolygonF &er_){er=er_;};
+    void setMinimumAreaEnclosingRectangle(QPolygonF &er_){er=er_;};
+    void clearAll();
+
 signals:
 
 public slots:

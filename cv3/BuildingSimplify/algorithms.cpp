@@ -1,3 +1,4 @@
+#include <cmath>
 #include "algorithms.h"
 #include "sortpointsbyy.h"
 #include "sortpointsbyx.h"
@@ -193,9 +194,9 @@ QPolygonF Algorithms::minAreaEnclosingRectangle(QPolygonF &pol)
     double sigma_min = 0;
     auto [mmb_min, area_min] = minMaxBox(pol);
 
-    //Process all segments of CH
-    int n = ch.size();
-    for(int i = 0; i < n; i++)
+            //Process all segments of CH
+            int n = ch.size();
+            for(int i = 0; i < n; i++)
     {
         // Compute direction sigma
         double dx = ch[(i+1)%n].x() - ch[i].x();
@@ -208,12 +209,12 @@ QPolygonF Algorithms::minAreaEnclosingRectangle(QPolygonF &pol)
         // Find new MMB
         auto [mmb,area] = minMaxBox(pol_r);
 
-        // Update min MMB
-        if(area < area_min)
+                // Update min MMB
+                if(area < area_min)
         {
-           mmb_min = mmb;
-           area_min = area;
-           sigma_min = sigma;
+            mmb_min = mmb;
+            area_min = area;
+            sigma_min = sigma;
         }
     }
 
@@ -223,7 +224,127 @@ QPolygonF Algorithms::minAreaEnclosingRectangle(QPolygonF &pol)
 }
 
 
+QPolygonF Algorithms::resizeRectangle(QPolygonF &rec, double areaB)
+{
+    // Resize rectangle to have the same area as the building
 
+    // Area of rec
+    double areaR = getArea(rec);
+
+    // Compute k
+    double k = areaB/areaR;
+
+    // Center of rectangle
+    double xc = (rec[0].x() + rec[1].x() + rec[2].x() + rec[3].x())/4;
+    double yc = (rec[0].y() + rec[1].y() + rec[2].y() + rec[3].y())/4;
+
+    //4 vectors
+    double u1x = rec[0].x() - xc;
+    double u1y = rec[0].y() - yc;
+    double u2x = rec[1].x() - xc;
+    double u2y = rec[1].y() - yc;
+    double u3x = rec[2].x() - xc;
+    double u3y = rec[2].y() - yc;
+    double u4x = rec[3].x() - xc;
+    double u4y = rec[3].y() - yc;
+
+    // Resize of vectors
+    double u1xr = sqrt(k) * u1x;
+    double u2xr = sqrt(k) * u2x;
+    double u3xr = sqrt(k) * u3x;
+    double u4xr = sqrt(k) * u4x;
+
+    double u1yr = sqrt(k) * u1y;
+    double u2yr = sqrt(k) * u2y;
+    double u3yr = sqrt(k) * u3y;
+    double u4yr = sqrt(k) * u4y;
+
+    // New coordinates of resized rectangle
+    QPointF v1r(xc + u1xr, yc + u1yr);
+    QPointF v2r(xc + u2xr, yc + u2yr);
+    QPointF v3r(xc + u3xr, yc + u3yr);
+    QPointF v4r(xc + u4xr, yc + u4yr);
+
+    //Create new polygon
+    QPolygonF err;
+    err.push_back(v1r);
+    err.push_back(v2r);
+    err.push_back(v3r);
+    err.push_back(v4r);
+
+    return err;
+
+}
+
+QPolygonF Algorithms::resMinAreaEnclosingRectangle(QPolygonF &pol)
+{
+    // Return resized minimum area enclosing rectangle
+    QPolygonF er = minAreaEnclosingRectangle(pol);
+
+    // Area building
+    double aB = getArea(pol);
+
+    // Resize minimum area enclosing rectangle
+    QPolygonF err = resizeRectangle(er, aB);
+
+    return err;
+}
+
+QPolygonF Algorithms::wallAverage(QPolygonF &pol)
+{
+    // Initial direction
+    double sigma1 = atan2(pol[1].y()-pol[0].y(),pol[1].x()-pol[0].x());
+
+    // Average remainder
+    double rAver = 0;
+    double sumW  = 0;
+
+    // Compute direction differences
+    int n = pol.size();
+    for (int i = 0; i < n; i++)
+    {
+        // Direction
+        double dxi = pol[(i+1)%n].x()-pol[i].x();
+        double dyi = pol[(i+1)%n].y()-pol[i].y();
+        double sigmai = atan2(dyi,dxi);
+
+        // Direction differencies
+        double d_sigmai = sigmai-sigma1;
+
+        //Correct quadrant
+        if (d_sigmai < 0)
+            d_sigmai +=2*M_PI;
+
+        // Remainder
+        double ki = round((2* d_sigmai) / M_PI);
+
+        double ri = d_sigmai - ki*(M_PI/2);
+
+        // Length of a segment
+        double leni = sqrt(dxi*dxi + dyi*dyi);
+
+        //Weighted average
+        rAver += leni*ri;
+        sumW  += leni;
+    }
+
+    // Weighted average
+    rAver /= sumW;
+
+    // Direction
+    sigma1 += rAver;
+
+    // Rotate by -sigma
+    QPolygonF pol_r = rotate(pol,-sigma1);
+
+    // Find new MMB
+    auto [mmb,area] = minMaxBox(pol_r);
+
+    // Convert min MMB to MAER
+    QPolygonF er= rotate(mmb, sigma1);
+
+    return resizeRectangle(er, getArea(pol));
+}
 
 
 

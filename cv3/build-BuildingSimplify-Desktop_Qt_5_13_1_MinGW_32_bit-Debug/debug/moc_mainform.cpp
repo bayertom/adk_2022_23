@@ -23,7 +23,7 @@ QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
 struct qt_meta_stringdata_MainForm_t {
     QByteArrayData data[4];
-    char stringdata0[58];
+    char stringdata0[56];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -33,13 +33,13 @@ struct qt_meta_stringdata_MainForm_t {
 static const qt_meta_stringdata_MainForm_t qt_meta_stringdata_MainForm = {
     {
 QT_MOC_LITERAL(0, 0, 8), // "MainForm"
-QT_MOC_LITERAL(1, 9, 23), // "on_pushButton_3_clicked"
-QT_MOC_LITERAL(2, 33, 0), // ""
-QT_MOC_LITERAL(3, 34, 23) // "on_pushButton_4_clicked"
+QT_MOC_LITERAL(1, 9, 21), // "on_pushButton_clicked"
+QT_MOC_LITERAL(2, 31, 0), // ""
+QT_MOC_LITERAL(3, 32, 23) // "on_pushButton_2_clicked"
 
     },
-    "MainForm\0on_pushButton_3_clicked\0\0"
-    "on_pushButton_4_clicked"
+    "MainForm\0on_pushButton_clicked\0\0"
+    "on_pushButton_2_clicked"
 };
 #undef QT_MOC_LITERAL
 
@@ -73,8 +73,8 @@ void MainForm::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, vo
         auto *_t = static_cast<MainForm *>(_o);
         Q_UNUSED(_t)
         switch (_id) {
-        case 0: _t->on_pushButton_3_clicked(); break;
-        case 1: _t->on_pushButton_4_clicked(); break;
+        case 0: _t->on_pushButton_clicked(); break;
+        case 1: _t->on_pushButton_2_clicked(); break;
         default: ;
         }
     }

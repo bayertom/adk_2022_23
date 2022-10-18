@@ -15,30 +15,33 @@ MainForm::~MainForm()
 }
 
 
-void MainForm::on_pushButton_3_clicked()
+void MainForm::on_pushButton_clicked()
 {
     // Get building
     QPolygonF building = ui->Canvas->getBuild();
-
-    //Get CH
     Algorithms a;
-    QPolygonF ch = a.createCH(building);
+    QPolygonF err;
 
-    //Set CH and repaint
-    ui->Canvas->setCH(ch);
+    // MAER
+    if (ui->comboBox->currentIndex() == 0)
+    {
+        err = a.resMinAreaEnclosingRectangle(building);
+    }
+
+    // Wall average
+    else
+    {
+        err = a.wallAverage(building);
+    }
+
+    //Set result and repaint
+    ui->Canvas->setMinimumAreaEnclosingRectangle(err);
     repaint();
 }
 
-void MainForm::on_pushButton_4_clicked()
+void MainForm::on_pushButton_2_clicked()
 {
-    // Get building
-    QPolygonF building = ui->Canvas->getBuild();
-
-    //Get MAER
-    Algorithms a;
-    QPolygonF er = a.minAreaEnclosingRectangle(building);
-
-    //Set CH and repaint
-    ui->Canvas->setMAER(er);
+    //Clear all
+    ui->Canvas->clearAll();
     repaint();
 }
