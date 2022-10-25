@@ -797,7 +797,8 @@ debug/algorithms.o: ../DTM/algorithms.cpp ../DTM/algorithms.h \
 		C:/Qt/5.13.1/mingw73_32/include/QtGui/qtextlist.h \
 		C:/Qt/5.13.1/mingw73_32/include/QtGui/qtexttable.h \
 		C:/Qt/5.13.1/mingw73_32/include/QtGui/qvalidator.h \
-		C:/Qt/5.13.1/mingw73_32/include/QtGui/qtguiversion.h
+		C:/Qt/5.13.1/mingw73_32/include/QtGui/qtguiversion.h \
+		../DTM/edge.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o debug\algorithms.o ..\DTM\algorithms.cpp
 
 debug/draw.o: ../DTM/draw.cpp ../DTM/draw.h \
@@ -1460,23 +1461,7 @@ debug/mainform.o: ../DTM/mainform.cpp ../DTM/mainform.h \
 		C:/Qt/5.13.1/mingw73_32/include/QtGui/qtouchdevice.h \
 		C:/Qt/5.13.1/mingw73_32/include/QtWidgets/qtabwidget.h \
 		C:/Qt/5.13.1/mingw73_32/include/QtGui/qicon.h \
-		ui_mainform.h \
-		C:/Qt/5.13.1/mingw73_32/include/QtCore/QVariant \
-		C:/Qt/5.13.1/mingw73_32/include/QtWidgets/QApplication \
-		C:/Qt/5.13.1/mingw73_32/include/QtWidgets/qapplication.h \
-		C:/Qt/5.13.1/mingw73_32/include/QtCore/qcoreapplication.h \
-		C:/Qt/5.13.1/mingw73_32/include/QtCore/qeventloop.h \
-		C:/Qt/5.13.1/mingw73_32/include/QtWidgets/qdesktopwidget.h \
-		C:/Qt/5.13.1/mingw73_32/include/QtGui/qguiapplication.h \
-		C:/Qt/5.13.1/mingw73_32/include/QtGui/qinputmethod.h \
-		C:/Qt/5.13.1/mingw73_32/include/QtWidgets/QMenuBar \
-		C:/Qt/5.13.1/mingw73_32/include/QtWidgets/qmenubar.h \
-		C:/Qt/5.13.1/mingw73_32/include/QtWidgets/qmenu.h \
-		C:/Qt/5.13.1/mingw73_32/include/QtWidgets/qaction.h \
-		C:/Qt/5.13.1/mingw73_32/include/QtWidgets/qactiongroup.h \
-		C:/Qt/5.13.1/mingw73_32/include/QtWidgets/QStatusBar \
-		C:/Qt/5.13.1/mingw73_32/include/QtWidgets/qstatusbar.h \
-		C:/Qt/5.13.1/mingw73_32/include/QtWidgets/QWidget
+		ui_mainform.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o debug\mainform.o ..\DTM\mainform.cpp
 
 debug/qpoint3d.o: ../DTM/qpoint3d.cpp ../DTM/qpoint3d.h \
