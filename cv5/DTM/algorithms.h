@@ -1,6 +1,7 @@
 #ifndef ALGORITHMS_H
 #define ALGORITHMS_H
 #include <vector>
+#include <list>
 #include "qpoint3d.h"
 #include "edge.h"
 
@@ -12,7 +13,8 @@ public:
     double getTwoLinesAngle(const QPoint3D &p1,const QPoint3D &p2,const QPoint3D &p3,const QPoint3D &p4);
     int getNearestPoint(const QPoint3D &p, const std::vector<QPoint3D> &points);
     int getDelaunayPoint(const QPoint3D &p1, const QPoint3D &p2,const std::vector<QPoint3D> &points);
-    std::vector<Edge> dT(const std::vector<QPoint3D> &points);
+    std::vector<Edge> createDT(const std::vector<QPoint3D> &points);
+    void updateAEL(const Edge &e, std::list<Edge> &ael);
 };
 
 #endif // ALGORITHMS_H

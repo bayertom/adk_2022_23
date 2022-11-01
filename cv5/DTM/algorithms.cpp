@@ -1,11 +1,10 @@
-#include <list>
 #include "algorithms.h"
 Algorithms::Algorithms()
 {
 
 }
 
-int Algorithms::getPointLinePosition(const QPoint3D &p1,const QPoint3D &p2,const QPoint3D &q)
+int Algorithms::getPointLinePosition(const QPoint3D &q, const QPoint3D &p1, const QPoint3D &p2)
 {
     //Analyze point and line position
     double ux = p2.x() - p1.x();
@@ -49,6 +48,7 @@ double Algorithms::getTwoLinesAngle(const QPoint3D &p1,const QPoint3D &p2,const 
     return acos(dot/(nu*vu));
 }
 
+
 int Algorithms::getNearestPoint(const QPoint3D &p, const std::vector<QPoint3D> &points)
 {
     //Find nearest point in point cloud
@@ -79,6 +79,7 @@ int Algorithms::getNearestPoint(const QPoint3D &p, const std::vector<QPoint3D> &
     return imin;
 }
 
+
 int Algorithms::getDelaunayPoint(const QPoint3D &p1, const QPoint3D &p2,const std::vector<QPoint3D> &points)
 {
     // Find Delaunay point (maximize angle)
@@ -91,22 +92,27 @@ int Algorithms::getDelaunayPoint(const QPoint3D &p1, const QPoint3D &p2,const st
         // P is different from edge (p1, p2)
         if ((p1 != points[i]) && (p2 != points[i])) {
 
-            // Compute angle
-            double om = getTwoLinesAngle(points[i], p1, points[i], p2);
-
-            // Update maximum
-            if (om > ommax)
+            //Point in the left half plane
+            if (getPointLinePosition(points[i], p1, p2) == 1)
             {
-                ommax = om;
-                imax = i;
+                // Compute angle
+                double om = getTwoLinesAngle(points[i], p1, points[i], p2);
+
+                // Update maximum
+                if (om > ommax)
+                {
+                    ommax = om;
+                    imax = i;
+                }
             }
         }
     }
+
     return imax;
 }
 
 
-std::vector<Edge> Algorithms::dT(const std::vector<QPoint3D> &points)
+std::vector<Edge> Algorithms::createDT(const std::vector<QPoint3D> &points)
 {
     // Delaunay triangulation - incremental construction
     std::vector<Edge> dt;
@@ -129,8 +135,56 @@ std::vector<Edge> Algorithms::dT(const std::vector<QPoint3D> &points)
     // Repeat until ael is empty
     while(!ael.empty())
     {
+        // Get last edge
+        Edge e1 = ael.back();
+        ael.pop_back();
 
+        // Switch orientation
+        Edge e1s = e1.switchOrientation();
+
+        // Find optimal Delaunay point
+        int idx = getDelaunayPoint(e1s.getP1(), e1s.getP2(),points);
+
+        // Optimal point was found
+        if (idx != -1)
+        {
+            // Get 3rd vertex of triangle
+            QPoint3D p3 =points[idx];
+
+            // Create remaining edges of triangle
+            Edge e2(e1s.getP2(), p3);
+            Edge e3(p3, e1s.getP1());
+
+            // Add to dt
+            dt.push_back(e1s);
+            dt.push_back(e2);
+            dt.push_back(e3);
+
+            // Update AEL
+            updateAEL(e2, ael);
+            updateAEL(e3, ael);
+        }
     }
+
+    return dt;
+}
+
+
+void Algorithms::updateAEL(const Edge &e, std::list<Edge> &ael)
+{
+    // Update AEL
+    Edge es = e.switchOrientation();
+
+    // Find in AEL
+    auto res = find(ael.begin(), ael.end(), es);
+
+    // Edge es is NOT in AEL
+    if (res == ael.end())
+        ael.push_back(e);
+
+    // Edge es is IN AEL
+    else
+        ael.erase(res);
 }
 
 

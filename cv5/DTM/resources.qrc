@@ -1,0 +1,11 @@
+<RCC>
+    <qresource prefix="/images">
+        <file>icons/contours2.png</file>
+        <file>icons/exit.png</file>
+        <file>icons/open_file.png</file>
+        <file>icons/orientation2.png</file>
+        <file>icons/settings.png</file>
+        <file>icons/slope2.png</file>
+        <file>icons/triangles2.png</file>
+    </qresource>
+</RCC>

@@ -11,25 +11,21 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>MainForm</string>
+   <string>DTM analysis</string>
   </property>
   <widget class="QWidget" name="centralwidget">
-   <widget class="Draw" name="Canvas" native="true">
-    <property name="geometry">
-     <rect>
-      <x>20</x>
-      <y>40</y>
-      <width>1111</width>
-      <height>661</height>
-     </rect>
-    </property>
-    <property name="sizePolicy">
-     <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
-      <horstretch>0</horstretch>
-      <verstretch>0</verstretch>
-     </sizepolicy>
-    </property>
-   </widget>
+   <layout class="QVBoxLayout" name="verticalLayout">
+    <item>
+     <widget class="Draw" name="Canvas" native="true">
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+        <horstretch>0</horstretch>
+        <verstretch>0</verstretch>
+       </sizepolicy>
+      </property>
+     </widget>
+    </item>
+   </layout>
   </widget>
   <widget class="QMenuBar" name="menubar">
    <property name="geometry">
@@ -45,15 +41,34 @@
      <string>File</string>
     </property>
     <addaction name="actionOpen"/>
+    <addaction name="separator"/>
+    <addaction name="actionExit"/>
    </widget>
    <widget class="QMenu" name="menuAnalyze">
     <property name="title">
      <string>Analyze</string>
     </property>
-    <addaction name="actionCreate_DTM"/>
+    <addaction name="actionCreate_DT"/>
+    <addaction name="actionCreate_contour_lines"/>
+    <addaction name="actionAnalyze_slope"/>
+    <addaction name="actionAnalyze_aspect"/>
+   </widget>
+   <widget class="QMenu" name="menuOptions">
+    <property name="title">
+     <string>Settings</string>
+    </property>
+    <addaction name="action_2"/>
+   </widget>
+   <widget class="QMenu" name="menuHelp">
+    <property name="title">
+     <string>Help</string>
+    </property>
+    <addaction name="actionAbout"/>
    </widget>
    <addaction name="menuFile"/>
    <addaction name="menuAnalyze"/>
+   <addaction name="menuOptions"/>
+   <addaction name="menuHelp"/>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
   <widget class="QToolBar" name="toolBar">
@@ -66,15 +81,111 @@
    <attribute name="toolBarBreak">
     <bool>false</bool>
    </attribute>
+   <addaction name="actionOpen"/>
+   <addaction name="separator"/>
+   <addaction name="actionCreate_DT"/>
+   <addaction name="actionCreate_contour_lines"/>
+   <addaction name="actionAnalyze_slope"/>
+   <addaction name="actionAnalyze_aspect"/>
+   <addaction name="separator"/>
+   <addaction name="action_2"/>
   </widget>
   <action name="actionOpen">
+   <property name="icon">
+    <iconset resource="resource.qrc">
+     <normaloff>:/images/icons/open_file.png</normaloff>:/images/icons/open_file.png</iconset>
+   </property>
    <property name="text">
     <string>Open</string>
    </property>
+   <property name="toolTip">
+    <string>Open file</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+O</string>
+   </property>
   </action>
-  <action name="actionCreate_DTM">
+  <action name="actionCreate_DT">
+   <property name="icon">
+    <iconset resource="resource.qrc">
+     <normaloff>:/images/icons/triangles2.png</normaloff>:/images/icons/triangles2.png</iconset>
+   </property>
    <property name="text">
-    <string>Create DTM</string>
+    <string>Create DT</string>
+   </property>
+   <property name="toolTip">
+    <string>Create Delaunay triangulation</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+T</string>
+   </property>
+  </action>
+  <action name="actionExit">
+   <property name="icon">
+    <iconset resource="resource.qrc">
+     <normaloff>:/images/icons/exit.png</normaloff>:/images/icons/exit.png</iconset>
+   </property>
+   <property name="text">
+    <string>Exit</string>
+   </property>
+   <property name="toolTip">
+    <string>Exit application</string>
+   </property>
+  </action>
+  <action name="actionCreate_contour_lines">
+   <property name="icon">
+    <iconset resource="resource.qrc">
+     <normaloff>:/images/icons/contours2.png</normaloff>:/images/icons/contours2.png</iconset>
+   </property>
+   <property name="text">
+    <string>Create contour lines</string>
+   </property>
+   <property name="toolTip">
+    <string>Create contour lines with specific interval</string>
+   </property>
+  </action>
+  <action name="actionAnalyze_slope">
+   <property name="icon">
+    <iconset resource="resource.qrc">
+     <normaloff>:/images/icons/slope2.png</normaloff>:/images/icons/slope2.png</iconset>
+   </property>
+   <property name="text">
+    <string>Analyze slope</string>
+   </property>
+   <property name="toolTip">
+    <string>Analyze slope of the terrain</string>
+   </property>
+  </action>
+  <action name="actionAnalyze_aspect">
+   <property name="icon">
+    <iconset resource="resource.qrc">
+     <normaloff>:/images/icons/orientation2.png</normaloff>:/images/icons/orientation2.png</iconset>
+   </property>
+   <property name="text">
+    <string>Analyze aspect</string>
+   </property>
+   <property name="toolTip">
+    <string>Analyze aspect of the terrain</string>
+   </property>
+  </action>
+  <action name="action_2">
+   <property name="icon">
+    <iconset resource="resource.qrc">
+     <normaloff>:/images/icons/settings.png</normaloff>:/images/icons/settings.png</iconset>
+   </property>
+   <property name="text">
+    <string>Options</string>
+   </property>
+   <property name="toolTip">
+    <string>Set options</string>
+   </property>
+  </action>
+  <action name="actionAbout">
+   <property name="text">
+    <string>About</string>
+   </property>
+   <property name="toolTip">
+    <string>About the software</string>
    </property>
   </action>
  </widget>
@@ -86,6 +197,8 @@
    <container>1</container>
   </customwidget>
  </customwidgets>
- <resources/>
+ <resources>
+  <include location="resource.qrc"/>
+ </resources>
  <connections/>
 </ui>

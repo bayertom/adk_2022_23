@@ -15,6 +15,21 @@ public:
     MainForm(QWidget *parent = nullptr);
     ~MainForm();
 
+private slots:
+    void on_actionOpen_triggered();
+
+    void on_actionCreate_DT_triggered();
+
+    void on_actionExit_triggered();
+
+    void on_actionCreate_contour_lines_triggered();
+
+    void on_actionAnalyze_slope_triggered();
+
+    void on_actionAnalyze_aspect_triggered();
+
+    void on_action_2_triggered();
+
 private:
     Ui::MainForm *ui;
 };

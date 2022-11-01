@@ -15,7 +15,7 @@ public:
     QPoint3D getP2() const {return p2;}
     void setP1(const QPoint3D &p1_){p1 = p1_;}
     void setP2(const QPoint3D &p2_){p2 = p2_;}
-    Edge switchOrientation(){return Edge(p2,p1);}
+    Edge switchOrientation()const{return Edge(p2,p1);}
 
     bool operator == (const Edge &e)
     {
