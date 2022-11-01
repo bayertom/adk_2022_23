@@ -10,7 +10,7 @@ Draw::Draw(QWidget *parent) : QWidget(parent)
 
 void Draw::mousePressEvent(QMouseEvent *event)
 {
-    //Get x,y coordinate
+    //Get x,y coordinates
     double x = event->pos().x();
     double y = event->pos().y();
 
@@ -49,7 +49,7 @@ void Draw::paintEvent(QPaintEvent *event)
         painter.drawEllipse(p.x()-r, p.y()-r, 2*r, 2*r);
     }
 
-    //Draw DT
+    //Draw DT represented by edges
     for(Edge e : dt)
     {
        // Get end points

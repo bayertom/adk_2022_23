@@ -4,6 +4,7 @@ Algorithms::Algorithms()
 
 }
 
+
 int Algorithms::getPointLinePosition(const QPoint3D &q, const QPoint3D &p1, const QPoint3D &p2)
 {
     //Analyze point and line position
@@ -52,13 +53,13 @@ double Algorithms::getTwoLinesAngle(const QPoint3D &p1,const QPoint3D &p2,const 
 int Algorithms::getNearestPoint(const QPoint3D &p, const std::vector<QPoint3D> &points)
 {
     //Find nearest point in point cloud
-    double dmin=100000;
+    double dmin = 1.0e16;
     int imin = -1;
 
-    // Browsing the point cloud
+    // Browse the point cloud
     for(int i = 0; i<points.size(); i++){
 
-        // P is different from points[i]
+        // Point p is different from points[i]
         if (p != points[i]){
 
             // Coordinate differences
@@ -86,10 +87,10 @@ int Algorithms::getDelaunayPoint(const QPoint3D &p1, const QPoint3D &p2,const st
     double ommax = 0;
     int imax = -1;
 
-    // Browsing the point cloud
+    // Browse the point cloud
     for(int i = 0; i<points.size(); i++){
 
-        // P is different from edge (p1, p2)
+        // Point is different from edge (p1, p2)
         if ((p1 != points[i]) && (p2 != points[i])) {
 
             //Point in the left half plane

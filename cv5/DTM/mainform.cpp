@@ -20,6 +20,7 @@ void MainForm::on_actionOpen_triggered()
     //Open file
 }
 
+
 void MainForm::on_actionCreate_DT_triggered()
 {
     //Create Delaunay triangulation
@@ -30,21 +31,24 @@ void MainForm::on_actionCreate_DT_triggered()
     Algorithms a;
     std::vector <Edge> dt = a.createDT(points);
 
-    // Update dt
+    // Update DT
     ui->Canvas->setDT(dt);
 
     repaint();
 }
+
 
 void MainForm::on_actionExit_triggered()
 {
     //Exit application
 }
 
+
 void MainForm::on_actionCreate_contour_lines_triggered()
 {
     //Create contour lines
 }
+
 
 void MainForm::on_actionAnalyze_slope_triggered()
 {
@@ -55,6 +59,7 @@ void MainForm::on_actionAnalyze_aspect_triggered()
 {
     //Analyze exposition
 }
+
 
 void MainForm::on_action_2_triggered()
 {
