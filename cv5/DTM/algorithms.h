@@ -15,6 +15,8 @@ public:
     int getDelaunayPoint(const QPoint3D &p1, const QPoint3D &p2,const std::vector<QPoint3D> &points);
     std::vector<Edge> createDT(const std::vector<QPoint3D> &points);
     void updateAEL(const Edge &e, std::list<Edge> &ael);
+    QPoint3D getContourPoint(const QPoint3D &p1, const QPoint3D &p2, double z);
+    std::vector<Edge> createContourLines(const std::vector<Edge> &dt, double zmin, double zmax, double dz);
 };
 
 #endif // ALGORITHMS_H

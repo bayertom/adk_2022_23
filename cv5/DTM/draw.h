@@ -14,6 +14,7 @@ class Draw : public QWidget
 
         std::vector <QPoint3D> points;
         std::vector <Edge> dt;
+        std::vector <Edge> contours;
 
 public:
     explicit Draw(QWidget *parent = nullptr);
@@ -22,7 +23,9 @@ public:
     std::vector <QPoint3D> getPoints(){return points;}
     std::vector <Edge> getDT(){return dt;}
     void setPoints(const std::vector <QPoint3D> &points_){points = points_;}
-    void setDT(const std::vector <Edge> &dt_){dt = dt_;}
+    void setDT(const std::vector <Edge> &dt_){dt = dt_;} 
+    void setContours(const std::vector <Edge> &contours_){contours = contours_;}
+
 
 
 

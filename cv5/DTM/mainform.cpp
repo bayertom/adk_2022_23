@@ -47,6 +47,32 @@ void MainForm::on_actionExit_triggered()
 void MainForm::on_actionCreate_contour_lines_triggered()
 {
     //Create contour lines
+    // Get points
+    std::vector <QPoint3D> points = ui->Canvas->getPoints();
+
+    // Create DT
+    Algorithms a;
+
+    //Get Delaunay triangulation
+    std::vector <Edge> dt = ui->Canvas->getDT();
+
+    // DT wasn't created yet
+    if(dt.size()==0)
+    {
+        dt = a.createDT(points);
+
+        // Update DT
+        ui->Canvas->setDT(dt);
+    }
+
+    // Generate contour lines
+    std::vector<Edge> contours = a.createContourLines(dt, 10, 1000, 5);
+
+    // Update DT
+    ui->Canvas->setContours(contours);
+
+
+    repaint();
 }
 
 

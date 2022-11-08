@@ -4,7 +4,7 @@
 
 Draw::Draw(QWidget *parent) : QWidget(parent)
 {
-
+    srand((unsigned)time(0));
 }
 
 
@@ -15,7 +15,7 @@ void Draw::mousePressEvent(QMouseEvent *event)
     double y = event->pos().y();
 
     //Create new point
-    QPoint3D p(x, y, 0);
+    QPoint3D p(x, y, rand() % 1000 );
 
     //Add as a new vertex
     points.push_back(p);
@@ -50,7 +50,20 @@ void Draw::paintEvent(QPaintEvent *event)
     }
 
     //Draw DT represented by edges
+    painter.setPen(Qt::green);
     for(Edge e : dt)
+    {
+       // Get end points
+       QPoint3D p1 = e.getP1();
+       QPoint3D p2 = e.getP2();
+
+       // Draw line
+       painter.drawLine(p1, p2);
+    }
+
+    // Draw contour lines
+    painter.setPen(Qt::gray);
+    for(Edge e : contours)
     {
        // Get end points
        QPoint3D p1 = e.getP1();
@@ -60,6 +73,6 @@ void Draw::paintEvent(QPaintEvent *event)
        painter.drawLine(p1,p2);
     }
 
-    //End draw
+    // End draw
     painter.end();
 }
