@@ -1,0 +1,12 @@
+release/algorithms.o
+release/draw.o
+release/edge.o
+release/main.o
+release/mainform.o
+release/qpoint3d.o
+release/settings.o
+release/triangle.o
+release/qrc_resource.o
+release/moc_draw.o
+release/moc_mainform.o
+release/moc_settings.o

@@ -288,4 +288,52 @@ std::vector<Edge> Algorithms::createContourLines(const std::vector<Edge> &dt, do
 
 }
 
+double Algorithms::computeSlope(const QPoint3D &p1, const QPoint3D &p2, const QPoint3D &p3)
+{
+    // Compute slope of triangle
+    double ux = p2.x() - p1.x();
+    double uy = p2.y() - p1.y();
+    double uz = p2.getZ() - p1.getZ();
+
+    double vx = p3.x() - p1.x();
+    double vy = p3.y() - p1.y();
+    double vz = p3.getZ() - p1.getZ();
+
+    // Compute cross product
+    double nx = uy*vz - uz*vy;
+    double ny = -ux*vz + uz*vx;
+    double nz = ux*vy - uy*vx;
+
+    // Norm of vector
+    double n1 = sqrt(nx*nx + ny*ny + nz*nz);
+
+    // Angle phi (slope)
+    return acos(nz/n1);
+}
+
+
+std::vector<Triangle> Algorithms::analyzeSlope(const std::vector<Edge> &dt)
+{
+    // Analyze slope
+    std::vector<Triangle> triangles;
+
+    for(int i = 0; i <= dt.size(); i += 3)
+    {
+        // Vertices of a triangle
+        QPoint3D p1 = dt[i].getP1();
+        QPoint3D p2 = dt[i].getP2();
+        QPoint3D p3 = dt[i+1].getP2();
+
+        // Compute slope
+        double slope = computeSlope(p1, p2, p3);
+
+        // Create triangle and add it to list
+        Triangle t(p1,p2,p3,slope,0);
+        triangles.push_back(t);
+    }
+    return triangles;
+}
+
+
+
 

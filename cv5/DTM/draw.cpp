@@ -42,6 +42,34 @@ void Draw::paintEvent(QPaintEvent *event)
         painter.drawEllipse(points[i].x()-r, points[i].y()-r, 2*r, 2*r);
     }
     */
+    //Draw triangles
+    for(Triangle t : triangles){
+        //Get points and slope of a triangle
+        QPoint3D p1 = t.getP1();
+        QPoint3D p2 = t.getP2();
+        QPoint3D p3 = t.getP3();
+
+        double slope = t.getSlope();
+
+        // Convert slope to RGB
+        double k = 255/M_PI;
+        int col = 255-slope*k;
+
+        //Set color
+        QColor color(col, col, col);
+        painter.setPen(color);
+        painter.setBrush(color);
+
+        //Create polygon
+        QPolygonF poly;
+        poly.push_back(p1);
+        poly.push_back(p2);
+        poly.push_back(p3);
+
+        //Draw polygon
+        painter.drawPolygon(poly);
+    }
+
     //Draw points, new
     for (QPoint3D p:points)
     {
@@ -72,6 +100,8 @@ void Draw::paintEvent(QPaintEvent *event)
        // Draw line
        painter.drawLine(p1,p2);
     }
+
+
 
     // End draw
     painter.end();

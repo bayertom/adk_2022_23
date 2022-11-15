@@ -2,6 +2,8 @@
 #define MAINFORM_H
 
 #include <QMainWindow>
+#include "settings.h"
+
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainForm; }
@@ -10,6 +12,10 @@ QT_END_NAMESPACE
 class MainForm : public QMainWindow
 {
     Q_OBJECT
+
+private:
+    double zmin, zmax, dz;
+    Settings settings;
 
 public:
     MainForm(QWidget *parent = nullptr);

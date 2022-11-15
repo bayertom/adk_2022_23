@@ -21,17 +21,22 @@ SOURCES += \
     edge.cpp \
     main.cpp \
     mainform.cpp \
-    qpoint3d.cpp
+    qpoint3d.cpp \
+    settings.cpp \
+    triangle.cpp
 
 HEADERS += \
     algorithms.h \
     draw.h \
     edge.h \
     mainform.h \
-    qpoint3d.h
+    qpoint3d.h \
+    settings.h \
+    triangle.h
 
 FORMS += \
-    mainform.ui
+    mainform.ui \
+    settings.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
