@@ -204,7 +204,7 @@ std::vector<Edge> Algorithms::createContourLines(const std::vector<Edge> &dt, do
     std::vector<Edge> contours;
 
     //Process each triangle in DT
-    for(int i = 0; i <= dt.size(); i +=3)
+    for(int i = 0; i < dt.size(); i +=3)
     {
         // Vertices of a triangle
         QPoint3D p1 = dt[i].getP1();
@@ -317,7 +317,7 @@ std::vector<Triangle> Algorithms::analyzeSlope(const std::vector<Edge> &dt)
     // Analyze slope
     std::vector<Triangle> triangles;
 
-    for(int i = 0; i <= dt.size(); i += 3)
+    for(int i = 0; i < dt.size(); i += 3)
     {
         // Vertices of a triangle
         QPoint3D p1 = dt[i].getP1();
@@ -331,6 +331,7 @@ std::vector<Triangle> Algorithms::analyzeSlope(const std::vector<Edge> &dt)
         Triangle t(p1,p2,p3,slope,0);
         triangles.push_back(t);
     }
+
     return triangles;
 }
 

@@ -1,0 +1,12 @@
+debug/algorithms.o
+debug/draw.o
+debug/edge.o
+debug/main.o
+debug/mainform.o
+debug/qpoint3d.o
+debug/settings.o
+debug/triangle.o
+debug/qrc_resource.o
+debug/moc_draw.o
+debug/moc_mainform.o
+debug/moc_settings.o
