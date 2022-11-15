@@ -81,7 +81,6 @@ void MainForm::on_actionCreate_contour_lines_triggered()
     // Update DT
     ui->Canvas->setContours(contours);
 
-
     repaint();
 }
 
@@ -119,6 +118,7 @@ void MainForm::on_actionAnalyze_slope_triggered()
     repaint();
 }
 
+
 void MainForm::on_actionAnalyze_aspect_triggered()
 {
     //Analyze exposition
@@ -127,9 +127,10 @@ void MainForm::on_actionAnalyze_aspect_triggered()
 
 void MainForm::on_action_2_triggered()
 {
-    //Set properties
+    //OK button
     if (settings.exec() == QDialog::Accepted)
     {
+        //Set properties
         zmin = settings.getZmin();
         zmax = settings.getZmax();
         dz =   settings.getDz();

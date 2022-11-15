@@ -42,6 +42,7 @@ void Draw::paintEvent(QPaintEvent *event)
         painter.drawEllipse(points[i].x()-r, points[i].y()-r, 2*r, 2*r);
     }
     */
+
     //Draw triangles
     for(Triangle t : triangles){
         //Get points and slope of a triangle
@@ -100,8 +101,6 @@ void Draw::paintEvent(QPaintEvent *event)
        // Draw line
        painter.drawLine(p1,p2);
     }
-
-
 
     // End draw
     painter.end();
