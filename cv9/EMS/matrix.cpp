@@ -2,594 +2,723 @@
  * matrix.cpp
  */
 
-#include <stdexcept>
-#include "matrix.h"
+//#include <stdexcept>
 #include <cmath>
+#include <vector>
 
-#define EPS 1e-10
+#include "matrix.h"
 
-using std::ostream;  using std::istream;  using std::endl;
-using std::domain_error;
+#define MIN_FLOAT 1e-37
+#define MAX_FLOAT 1e37
 
-/* PUBLIC MEMBER FUNCTIONS
- ********************************/
-
-Matrix::Matrix(int rows, int cols) : rows_(rows), cols_(cols)
+Matrix:: Matrix ( const unsigned int rows_count_, const unsigned int columns_count_, const double non_diag_val, const double diag_val ) :
+    rows_count ( rows_count_ ), columns_count ( columns_count_ ), items ( rows_count_, std::vector <double>( columns_count_, non_diag_val ) )
 {
-    allocSpace();
-    for (int i = 0; i < rows_; ++i) {
-        for (int j = 0; j < cols_; ++j) {
-            p[i][j] = 0;
-        }
+    //Create matrix with a specific value on the main diagonal
+    for ( unsigned int i = 0; i < std::min ( rows_count, columns_count ) ; i++ )
+    {
+        items[i][i] = diag_val;
     }
 }
 
-Matrix::Matrix(double** a, int rows, int cols) : rows_(rows), cols_(cols)
+
+
+Matrix & Matrix ::operator = (const Matrix &M )
 {
-    allocSpace();
-    for (int i = 0; i < rows_; ++i) {
-        for (int j = 0; j < cols_; ++j) {
-            p[i][j] = a[i][j];
+    //Assignment operator =
+    if ( this != &M )
+    {
+        //Matrix dimension are invalid, throw exception
+        if ( rows_count !=  M.rows_count )
+            throw std::invalid_argument ( "Exception: different rows count in operator =. Can not assign matrices.");
+
+        //Matrix dimension are invalid, throw exception
+        if ( columns_count != M.columns_count )
+            throw std::invalid_argument ( "Exception: different columns count in operator =. Can not assign matrices.");
+
+        //Process all lines
+        for ( unsigned int i = 0; i < rows_count; i++ )
+        {
+            //Process columns_count of the actual row
+            for ( unsigned int j = 0 ; j < columns_count; j++ )
+                items[i][j] = M.items[i][j];
         }
     }
-}
 
-Matrix::Matrix() : rows_(1), cols_(1)
-{
-    allocSpace();
-    p[0][0] = 0;
-}
-
-Matrix::~Matrix()
-{
-    for (int i = 0; i < rows_; ++i) {
-        delete[] p[i];
-    }
-    delete[] p;
-}
-
-Matrix::Matrix(const Matrix& m) : rows_(m.rows_), cols_(m.cols_)
-{
-    allocSpace();
-    for (int i = 0; i < rows_; ++i) {
-        for (int j = 0; j < cols_; ++j) {
-            p[i][j] = m.p[i][j];
-        }
-    }
-}
-
-Matrix& Matrix::operator=(const Matrix& m)
-{
-    if (this == &m) {
-        return *this;
-    }
-
-    if (rows_ != m.rows_ || cols_ != m.cols_) {
-        for (int i = 0; i < rows_; ++i) {
-            delete[] p[i];
-        }
-        delete[] p;
-
-        rows_ = m.rows_;
-        cols_ = m.cols_;
-        allocSpace();
-    }
-
-    for (int i = 0; i < rows_; ++i) {
-        for (int j = 0; j < cols_; ++j) {
-            p[i][j] = m.p[i][j];
-        }
-    }
     return *this;
 }
 
-Matrix& Matrix::operator+=(const Matrix& m)
+
+Matrix & Matrix :: operator += ( const Matrix &M )
 {
-    for (int i = 0; i < rows_; ++i) {
-        for (int j = 0; j < cols_; ++j) {
-            p[i][j] += m.p[i][j];
-        }
+    //Matrix operator += : Matrix += Matrix
+    if ( this->rows_count !=  M.rows() )
+        throw std::invalid_argument ( "Exception: different rows count.  Cannot compute A += B.");
+
+    //Matrix dimension are invalid, throw exception
+    if ( this->columns_count != M.cols() )
+        throw std::invalid_argument ( "Exception: different columns count.  Cannot compute A += B.");
+
+    //Process all lines
+    for ( unsigned int i = 0;  i < rows_count; i++ )
+    {
+        //Process columns_count of the actual row
+        for ( unsigned int j = 0 ; j < columns_count; j++ )
+            items[i][j] = items[i][j]  + M( i, j);
     }
+
     return *this;
 }
 
-Matrix& Matrix::operator-=(const Matrix& m)
+
+Matrix & Matrix :: operator -= ( const Matrix &M )
 {
-    for (int i = 0; i < rows_; ++i) {
-        for (int j = 0; j < cols_; ++j) {
-            p[i][j] -= m.p[i][j];
-        }
+    //Matrix operators -= : Matrix -= Matrix
+    if ( this->rows_count !=  M.rows() )
+        throw std::invalid_argument ( "Exception: different rows count.  Cannot compute A += B.");
+
+    //Matrix dimension are invalid, throw exception
+    if ( this->columns_count != M.cols() )
+        throw std::invalid_argument ( "Exception: different columns count.  Cannot compute A += B.");
+
+    //Process all lines
+    for ( unsigned int i = 0;  i < rows_count; i++ )
+    {
+        //Process columns_count of the actual row
+        for ( unsigned int j = 0 ; j < columns_count; j++ )
+            items[i][j] = items[i][j]  - M ( i, j );
     }
+
     return *this;
 }
 
-Matrix& Matrix::operator*=(const Matrix& m)
+/*
+Matrix & Matrix ::operator * ( const Matrix &M )
 {
-    Matrix temp(rows_, m.cols_);
-    for (int i = 0; i < temp.rows_; ++i) {
-        for (int j = 0; j < temp.cols_; ++j) {
-            for (int k = 0; k < cols_; ++k) {
-                temp.p[i][j] += (p[i][k] * m.p[k][j]);
+    //Matrix operator *= : Matrix *= Matrix
+    if ( columns_count !=  M.rows() )
+        throw std::invalid_argument ( "Exception: different rows and columns count. Cannot compute A *= B.");
+
+    Matrix C ( rows_count, M.cols() );
+
+    //Matrix multiplication
+    for (unsigned int i = 0; i < rows_count; i++)
+    {
+        for (unsigned int k = 0; k < columns_count; k++)
+        {
+            for (unsigned int j = 0; j < M.cols(); j++)
+            {
+                C(i, j) += items[i][k] * M(k, j);
             }
         }
     }
-    return (*this = temp);
-}
 
-Matrix& Matrix::operator*=(double num)
+    return C;
+}
+*/
+
+Matrix & Matrix::operator *=(double val)
 {
-    for (int i = 0; i < rows_; ++i) {
-        for (int j = 0; j < cols_; ++j) {
-            p[i][j] *= num;
+    //Matrix operator *= : Matrix *= scalar
+    for (unsigned int i = 0; i < rows_count; i++)
+    {
+        for (unsigned int j = 0; j < columns_count; j++)
+        {
+            items[i][j] *= val;
         }
     }
+
     return *this;
 }
 
-Matrix& Matrix::operator/=(double num)
+
+Matrix & Matrix::operator /= (double val)
 {
-    for (int i = 0; i < rows_; ++i) {
-        for (int j = 0; j < cols_; ++j) {
-            p[i][j] /= num;
+    //Matrix operator /= : Matrix /= scalar
+    for (unsigned int i = 0; i < rows_count; ++i)
+    {
+        for (unsigned int j = 0; j < columns_count; ++j)
+        {
+            items[i][j] /= val;
         }
     }
+
     return *this;
 }
 
-Matrix Matrix::operator^(int num)
-{
-    Matrix temp(*this);
-    return expHelper(temp, num);
-}
 
-void Matrix::swapRows(int r1, int r2)
+Matrix & Matrix::operator |= (const Matrix & M)
 {
-    double *temp = p[r1];
-    p[r1] = p[r2];
-    p[r2] = temp;
-}
+    //Matrix operator |= : Matrix | Matrix (Hadamard product)
+    if ( this->rows_count !=  M.rows() )
+        throw std::invalid_argument ( "Exception: different rows count.  Cannot compute A += B.");
 
-Matrix Matrix::transpose()
-{
-    Matrix ret(cols_, rows_);
-    for (int i = 0; i < rows_; ++i) {
-        for (int j = 0; j < cols_; ++j) {
-            ret.p[j][i] = p[i][j];
+    //Matrix dimension are invalid, throw exception
+    if ( this->columns_count != M.cols() )
+        throw std::invalid_argument ( "Exception: different columns count.  Cannot compute A += B.");
+
+    //Process all lines
+    for ( unsigned int i = 0;  i < rows_count; i++ )
+    {
+        //Process columns_count of the actual row
+        for ( unsigned int j = 0 ; j < columns_count; j++ )
+        {
+            items[i][j] = items[i][j] * M( i, j);
         }
     }
-    return ret;
+
+    return *this;
 }
 
-Matrix Matrix::diff()
+
+
+Matrix Matrix::row ( const unsigned int r ) const
 {
-    Matrix AD(rows_ - 1, cols_);
-    for (int i = 0; i < rows_ - 1; i++) {
-        for (int j = 0; j < cols_; j++) {
-            AD.p[i] [j] = p[i + 1][j] - p[i] [j];
+    //Get row of the matrix
+    //Matrix dimension invalid, throw exception
+    if ( r > rows_count )
+        throw std::out_of_range ( "Exception: row index exceeds rows_count.  " );
+
+    //Call operator A(r1, r2, c1, c2)
+    return (*this)(r, r, 0, columns_count - 1);
+}
+
+
+Matrix Matrix :: col ( const unsigned int c ) const
+{
+    //Get column of the matrix
+    //Matrix dimension invalid, throw exception
+    if ( c > columns_count )
+        throw std::out_of_range ( "Exception: column index exceeds columns_count.  " );
+
+    //Call operator A(r1, r2, c1, c2)
+    return (*this)(0, rows_count - 1, c, c);
+}
+
+
+void Matrix::row ( const Matrix &M, const unsigned int r )
+{
+    //Set row vector of the matrix
+    //Matrix dimension invalid, throw exception
+    if ( r > rows_count )
+        throw std::out_of_range ( "Exception: row index exceeds rows_count.  " );
+
+    //Call operator A(M, r, c);
+    (*this)(M, r, 0);
+}
+
+
+
+void Matrix::col ( const Matrix &M, const unsigned int c )
+{
+    //Set column vector of the matrix
+    //Matrix dimension invalid, throw exception
+    if ( c > columns_count )
+        throw std::out_of_range ( "Exception: column index exceeds columns_count.  " );
+
+    //Call operator A(M, r, c);
+    (*this)(M, 0, c);
+}
+
+
+
+double & Matrix:: operator() ( const unsigned int row, unsigned int col )
+{
+    //Matrix operator ()()
+    //Matrix dimension invalid, throw exception
+    if ( row > rows_count )
+        throw std::out_of_range ( "Exception: row index exceeds rows_count.  " );
+
+    //Matrix dimension invalid, throw exception
+    if ( col > columns_count )
+        throw std::out_of_range ( "Exception: column index exceeds columns_count.  " );
+
+    return items[row][col];
+}
+
+
+double const & Matrix:: operator() ( const unsigned int row, unsigned int col ) const
+{
+    //Matrix operator ()()
+    //Matrix dimension invalid, throw exception
+    if ( row > rows_count )
+        throw std::out_of_range ( "Exception: row index exceeds rows_count.  " );
+
+    //Matrix dimension invalid, throw exception
+    if ( col > columns_count )
+        throw std::out_of_range ( "Exception: column index exceeds columns_count.  " );
+
+    return items[row][col];
+}
+
+
+Matrix Matrix::operator () ( const unsigned int r1, const unsigned int r2, const unsigned int c1, const unsigned int c2 ) const
+{
+    //Matrix operator (r1, r2, c1, c2): get submatrix of the matrix
+    //Bad row index
+    if ( r2 >  rows_count )
+        throw std::out_of_range ( "BadDataException: row index r2 must not be greater than A.rows_count. Can not create the submatrix." );
+
+    //Bad row index
+    if ( c2 > columns_count )
+        throw std::out_of_range ( "BadDataException: col index c2 must not be greater than A.columns_count. Can not create the submatrix. " );
+
+    //Bad row index interval
+    if ( r1 > r2 )
+        throw std::out_of_range ( "BadDataException: row index r2 must not be smaller then r1. Can not create the submatrix. " );
+
+    //Bad col index interval
+    if ( c1 > c2 )
+        throw std::out_of_range ( "BadDataException: col index c2 must not be smaller then c1. Can not create the submatrix. " );
+
+    //Create sub-matrix
+    Matrix M ( r2 - r1 + 1, c2 - c1 + 1 ) ;
+
+    for ( unsigned int i = r1; i <= r2; i++ )
+    {
+        for ( unsigned int j = c1; j <= c2; j++ )
+        {
+            M ( i - r1, j - c1 ) = items[i][j];
         }
     }
+
+    return M;
+}
+
+
+void Matrix::operator () (const Matrix &M, const unsigned int row, const unsigned int col)
+{
+    //Matrix operator (M, r, c): replace part of the matrix A at the position [row, col] with M
+    const unsigned int m = M.rows(), n = M.cols();
+
+    //Invalid index, throw exception
+    if (m + row > rows_count)
+        throw std::out_of_range("IndexOutOfBoundException: a submatrix does not fit at the specified row position, can not append a submatrix to the matrix. ");
+
+    //Invalid index, throw exception
+    if (n + col > columns_count)
+        throw std::out_of_range("IndexOutOfBoundException: a submatrix does not fit at the specified col position, can not append a submatrix to the matrix.");
+
+    //Copy submatrix
+    for (unsigned int i = 0; i < m; i++)
+    {
+        for (unsigned int j = 0; j < n; j++)
+        {
+            items[i + row][j + col] = M(i, j);
+        }
+    }
+}
+
+
+void Matrix::print ( std::ostream * output ) const
+{
+    //Print matrix
+    *output << std::showpoint << std::fixed << std::right;
+    *output << '\n';
+
+    for ( unsigned int i = 0; i < rows_count; i++ )
+    {
+        *output << "| ";
+
+        for ( unsigned int j = 0; j < columns_count; j++ )
+        {
+            *output <<  std::setw ( 18 ) << std::setprecision ( 9 );
+            items[i][j] < 1.0e16 ? *output << items[i][j] : *output << "---";
+        }
+
+        *output << " |" << '\n';
+    }
+}
+
+
+Matrix Matrix::trans()
+{
+    //Transpose matrix
+    Matrix AT(columns_count, rows_count);
+
+    for (unsigned int i = 0; i < rows_count; ++i)
+    {
+        for (unsigned int j = 0; j < columns_count; ++j)
+        {
+            AT(j, i) = items[i][j];
+        }
+    }
+
+    return AT;
+}
+
+Matrix Matrix::diff() const
+{
+    //Create differences of rows
+    Matrix AD(rows_count - 1, columns_count);
+
+    for (unsigned int i = 0; i < rows_count - 1; i++)
+    {
+        for (unsigned int j = 0; j < columns_count; j++)
+        {
+            AD(i, j) = items[i + 1][j] - items[i] [j];
+        }
+    }
+
     return AD;
 }
 
-double Matrix::mean()
+
+double Matrix::mean() const
 {
+    //Compute mean
     double sum = 0.0;
-    for (int i = 0; i < rows_; i++) {
-        for (int j = 0; j < cols_; j++) {
-            sum += p[i][j];
-        }
-    }
 
-    return sum / (rows_ * cols_);
-}
-
-/* STATIC CLASS FUNCTIONS
- ********************************/
-
-Matrix Matrix::createIdentity(int size)
-{
-    Matrix temp(size, size);
-    for (int i = 0; i < temp.rows_; ++i) {
-        for (int j = 0; j < temp.cols_; ++j) {
-            if (i == j) {
-                temp.p[i][j] = 1;
-            } else {
-                temp.p[i][j] = 0;
-            }
-        }
-    }
-    return temp;
-}
-
-Matrix Matrix::solve(Matrix A, Matrix b)
-{
-    // Gaussian elimination
-    for (int i = 0; i < A.rows_; ++i) {
-        if (A.p[i][i] == 0) {
-            // pivot 0 - throw error
-            throw domain_error("Error: the coefficient matrix has 0 as a pivot. Please fix the input and try again.");
-        }
-        for (int j = i + 1; j < A.rows_; ++j) {
-            for (int k = i + 1; k < A.cols_; ++k) {
-                A.p[j][k] -= A.p[i][k] * (A.p[j][i] / A.p[i][i]);
-                if (A.p[j][k] < EPS && A.p[j][k] > -1*EPS)
-                    A.p[j][k] = 0;
-            }
-            b.p[j][0] -= b.p[i][0] * (A.p[j][i] / A.p[i][i]);
-            if (A.p[j][0] < EPS && A.p[j][0] > -1*EPS)
-                A.p[j][0] = 0;
-            A.p[j][i] = 0;
-        }
-    }
-
-    // Back substitution
-    Matrix x(b.rows_, 1);
-    x.p[x.rows_ - 1][0] = b.p[x.rows_ - 1][0] / A.p[x.rows_ - 1][x.rows_ - 1];
-    if (x.p[x.rows_ - 1][0] < EPS && x.p[x.rows_ - 1][0] > -1*EPS)
-        x.p[x.rows_ - 1][0] = 0;
-    for (int i = x.rows_ - 2; i >= 0; --i) {
-        int sum = 0;
-        for (int j = i + 1; j < x.rows_; ++j) {
-            sum += A.p[i][j] * x.p[j][0];
-        }
-        x.p[i][0] = (b.p[i][0] - sum) / A.p[i][i];
-        if (x.p[i][0] < EPS && x.p[i][0] > -1*EPS)
-            x.p[i][0] = 0;
-    }
-
-    return x;
-}
-
-Matrix Matrix::bandSolve(Matrix A, Matrix b, int k)
-{
-    // optimized Gaussian elimination
-    int bandsBelow = (k - 1) / 2;
-    for (int i = 0; i < A.rows_; ++i) {
-        if (A.p[i][i] == 0) {
-            // pivot 0 - throw exception
-            throw domain_error("Error: the coefficient matrix has 0 as a pivot. Please fix the input and try again.");
-        }
-        for (int j = i + 1; j < A.rows_ && j <= i + bandsBelow; ++j) {
-            int k = i + 1;
-            while (k < A.cols_ && A.p[j][k]) {
-                A.p[j][k] -= A.p[i][k] * (A.p[j][i] / A.p[i][i]);
-                k++;
-            }
-            b.p[j][0] -= b.p[i][0] * (A.p[j][i] / A.p[i][i]);
-            A.p[j][i] = 0;
-        }
-    }
-
-    // Back substitution
-    Matrix x(b.rows_, 1);
-    x.p[x.rows_ - 1][0] = b.p[x.rows_ - 1][0] / A.p[x.rows_ - 1][x.rows_ - 1];
-    for (int i = x.rows_ - 2; i >= 0; --i) {
-        int sum = 0;
-        for (int j = i + 1; j < x.rows_; ++j) {
-            sum += A.p[i][j] * x.p[j][0];
-        }
-        x.p[i][0] = (b.p[i][0] - sum) / A.p[i][i];
-    }
-
-    return x;
-}
-
-// functions on VECTORS
-double Matrix::dotProduct(Matrix a, Matrix b)
-{
-    double sum = 0;
-    for (int i = 0; i < a.rows_; ++i) {
-        sum += (a(i, 0) * b(i, 0));
-    }
-    return sum;
-}
-
-// functions on AUGMENTED matrices
-Matrix Matrix::augment(Matrix A, Matrix B)
-{
-    Matrix AB(A.rows_, A.cols_ + B.cols_);
-    for (int i = 0; i < AB.rows_; ++i) {
-        for (int j = 0; j < AB.cols_; ++j) {
-            if (j < A.cols_)
-                AB(i, j) = A(i, j);
-            else
-                AB(i, j) = B(i, j - B.cols_);
-        }
-    }
-    return AB;
-}
-
-Matrix Matrix::gaussianEliminate()
-{
-    Matrix Ab(*this);
-    int rows = Ab.rows_;
-    int cols = Ab.cols_;
-    int Acols = cols - 1;
-
-    int i = 0; // row tracker
-    int j = 0; // column tracker
-
-    // iterate through the rows
-    while (i < rows)
+    for (unsigned int i = 0; i < rows_count; i++)
     {
-        // find a pivot for the row
-        bool pivot_found = false;
-        while (j < Acols && !pivot_found)
+        for (unsigned int j = 0; j < columns_count; j++)
         {
-            if (Ab(i, j) != 0) { // pivot not equal to 0
-                pivot_found = true;
-            } else { // check for a possible swap
-                int max_row = i;
-                double max_val = 0;
-                for (int k = i + 1; k < rows; ++k)
-                {
-                    double cur_abs = Ab(k, j) >= 0 ? Ab(k, j) : -1 * Ab(k, j);
-                    if (cur_abs > max_val)
-                    {
-                        max_row = k;
-                        max_val = cur_abs;
-                    }
-                }
-                if (max_row != i) {
-                    Ab.swapRows(max_row, i);
-                    pivot_found = true;
-                } else {
-                    j++;
-                }
-            }
+            sum += items[i][j];
         }
+    }
 
-        // perform elimination as normal if pivot was found
-        if (pivot_found)
+    return sum / (rows_count * columns_count);
+}
+
+
+std::tuple<double, int, int> Matrix::min() const
+{
+    //Find minimum element
+    int row = 0, col = 0;
+    double amin = items[0][0];
+
+    //Process all items
+    for (unsigned int i = 0; i < rows_count; i++)
+    {
+        for (unsigned int j = 0; j < columns_count; j++)
         {
-            for (int t = i + 1; t < rows; ++t) {
-                for (int s = j + 1; s < cols; ++s) {
-                    Ab(t, s) = Ab(t, s) - Ab(i, s) * (Ab(t, j) / Ab(i, j));
-                    if (Ab(t, s) < EPS && Ab(t, s) > -1*EPS)
-                        Ab(t, s) = 0;
-                }
-                Ab(t, j) = 0;
+            if (items[i][j] < amin)
+            {
+                amin = items[i][j];
+                row = i; col = j;
             }
         }
-
-        i++;
-        j++;
     }
 
-    return Ab;
+    return {amin, row, col};
 }
 
-Matrix Matrix::rowReduceFromGaussian()
+std::tuple<double, int, int> Matrix::max() const
 {
-    Matrix R(*this);
-    int rows = R.rows_;
-    int cols = R.cols_;
+    //FInd maximum element
+    int row = 0, col = 0;
+    double amax = items[0][0];
 
-    int i = rows - 1; // row tracker
-    int j = cols - 2; // column tracker
-
-    // iterate through every row
-    while (i >= 0)
+    //Process all items
+    for (unsigned int i = 0; i < rows_count; i++)
     {
-        // find the pivot column
-        int k = j - 1;
-        while (k >= 0) {
-            if (R(i, k) != 0)
-                j = k;
-            k--;
-        }
-
-        // zero out elements above pivots if pivot not 0
-        if (R(i, j) != 0) {
-       
-            for (int t = i - 1; t >= 0; --t) {
-                for (int s = 0; s < cols; ++s) {
-                    if (s != j) {
-                        R(t, s) = R(t, s) - R(i, s) * (R(t, j) / R(i, j));
-                        if (R(t, s) < EPS && R(t, s) > -1*EPS)
-                            R(t, s) = 0;
-                    }
-                }
-                R(t, j) = 0;
+        for (unsigned int j = 0; j < columns_count; j++)
+        {
+            if (items[i][j] > amax)
+            {
+                amax = items[i][j];
+                row = i; col = j;
             }
-
-            // divide row by pivot
-            for (int k = j + 1; k < cols; ++k) {
-                R(i, k) = R(i, k) / R(i, j);
-                if (R(i, k) < EPS && R(i, k) > -1*EPS)
-                    R(i, k) = 0;
-            }
-            R(i, j) = 1;
-
         }
-
-        i--;
-        j--;
     }
 
-    return R;
+    return {amax, row, col};
 }
 
-void Matrix::readSolutionsFromRREF(ostream& os)
-{
-    Matrix R(*this);
 
-    // print number of solutions
-    bool hasSolutions = true;
-    bool doneSearching = false;
-    int i = 0;
-    while (!doneSearching && i < rows_)
+Matrix Matrix::sqrtm() const
+{
+    //Compute sqrt
+    Matrix IS(rows_count, columns_count);
+
+    for (unsigned int i = 0; i < rows_count; i++)
     {
-        bool allZeros = true;
-        for (int j = 0; j < cols_ - 1; ++j) {
-            if (R(i, j) != 0)
-                allZeros = false;
+        for (unsigned int j = 0; j < columns_count; j++)
+        {
+            IS(i, j) = sqrt(items[i][j]);
         }
-        if (allZeros && R(i, cols_ - 1) != 0) {
-            hasSolutions = false;
-            os << "NO SOLUTIONS" << endl << endl;
-            doneSearching = true;
-        } else if (allZeros && R(i, cols_ - 1) == 0) {
-            os << "INFINITE SOLUTIONS" << endl << endl;
-            doneSearching = true;
-        } else if (rows_ < cols_ - 1) {
-            os << "INFINITE SOLUTIONS" << endl << endl;
-            doneSearching = true;
-        }
-        i++;
     }
-    if (!doneSearching)
-        os << "UNIQUE SOLUTION" << endl << endl;
 
-    // get solutions if they exist
-    if (hasSolutions)
+    return IS;
+}
+
+//LU decomposition of the matrix
+void Matrix::lu(Matrix &L, Matrix &U, Matrix &P, short &sign) const
+{
+    //LU decomposition of A, L = lower triangular matrix, U = upper triangular matrix, P = permutation matrix
+
+    //Set the determinant det(U) sign to 1
+    sign = 1;
+
+    //Is A rectangular matrix ?
+    if (rows_count != columns_count)
     {
-        Matrix particular(cols_ - 1, 1);
-        Matrix special(cols_ - 1, 1);
+        throw std::invalid_argument ("Exception: invalid dimension of the matrix (rectangle matrix), can not perform LU decomposition.");
+    }
 
-        for (int i = 0; i < rows_; ++i) {
-            bool pivotFound = false;
-            bool specialCreated = false;
-            for (int j = 0; j < cols_ - 1; ++j) {
-                if (R(i, j) != 0) {
-                    // if pivot variable, add b to particular
-                    if (!pivotFound) {
-                        pivotFound = true;
-                        particular(j, 0) = R(i, cols_ - 1);
-                    } else { // otherwise, add to special solution
-                        if (!specialCreated) {
-                            special = Matrix(cols_ - 1, 1);
-                            specialCreated = true;
-                        }
-                        special(j, 0) = -1 * R(i, j);
-                    }
-                }
+    //Create row permutation vector
+    Matrix PR(1, columns_count);
+
+    //Create scale vector
+    Matrix  S(1, columns_count);
+
+    //Set diagonal items of L to 1, otherwise to 0
+    //Set items of the row permutation matrix to <0; n-1>
+    for (unsigned int i = 0; i < rows_count; i++)
+    {
+        L(i, i) = 1.0;
+        PR(0, i) = i;
+
+        for (unsigned int j = 0; j < rows_count; j++)
+        {
+            if (j != i)
+                L(i, j) = 0;
+
+            P(i, j) = 0;
+        }
+    }
+
+    //Initialize U = A
+    U = *this;
+
+    //Find max item in each row to compute the scale vector
+    for (unsigned int i = 0; i < columns_count; i++)
+    {
+        double max_val = 0.0;
+
+        for (unsigned int j = 0; j < columns_count; j++)
+        {
+            if (fabs(U(i, j)) > max_val)
+                max_val = fabs(U(i, j));
+        }
+
+        //Actualize scale vector
+        if (max_val > MIN_FLOAT)
+            S(0, i) = 1.0 / max_val;
+    }
+
+    //Start LU decomposition
+    for (unsigned int j = 0; j < columns_count; j++)
+    {
+        for (unsigned int i = 0; i < j; i++)
+        {
+            double sum = U(i, j);
+
+            //Compute new U ( i, j ) item: multiply ith row and j-th column
+            for (unsigned int k = 0; k < i; k++) sum -= U(i, k) * U(k, j);
+
+            U(i, j) = sum;
+        }
+
+        //Initialize max_val and pivot index
+        double max_val = 0.0;
+        unsigned int i_pivot = columns_count;
+
+        //Find row that will be swapped and actualize row index
+        for (unsigned int i = j; i < columns_count; i++)
+        {
+            double sum = U(i, j);
+
+            //Compute new U ( i, j ) item: multiply ith row and j-th column
+            for (unsigned int k = 0; k < j; k++) sum -= U(i, k) * U(k, j);
+
+            //Compute new U (i, j)
+            U(i, j) = sum;
+
+            //Compute index of the pivot
+            const double val = S(0, i) * fabs(sum);
+
+            if (val >= max_val)
+            {
+                max_val = val;
+                i_pivot = i;
             }
-            os << "Special solution:" << endl << special << endl;
         }
-        os << "Particular solution:" << endl << particular << endl;
-    }
-}
 
-Matrix Matrix::inverse()
-{
-    Matrix I = Matrix::createIdentity(rows_);
-    Matrix AI = Matrix::augment(*this, I);
-    Matrix U = AI.gaussianEliminate();
-    Matrix IAInverse = U.rowReduceFromGaussian();
-    Matrix AInverse(rows_, cols_);
-    for (int i = 0; i < AInverse.rows_; ++i) {
-        for (int j = 0; j < AInverse.cols_; ++j) {
-            AInverse(i, j) = IAInverse(i, j + cols_);
+        //Perform row swaps in U,PR: j <-> i_pivot
+        if ((j != i_pivot) && (i_pivot < columns_count))
+        {
+            //Perform swap in U matrix
+            const Matrix  U_temp = U(i_pivot, i_pivot, 0, columns_count - 1);
+            U(U(j, j, 0, columns_count - 1), i_pivot, 0);
+            U(U_temp, j, 0);
+
+            //Perform swap in the row permutation matrix
+            const unsigned int perm_temp = PR(0, i_pivot);
+            PR(0, i_pivot) = PR(0, j);
+            PR(0, j) = perm_temp;
+
+            //Actualize also the scale vector
+            S(0, i_pivot) = S(0, j);
+
+            //Actualize sign of the determinant det(U)
+            sign *= -1;
         }
-    }
-    return AInverse;
-}
 
-Matrix Matrix::sqrtm()
-{
-    Matrix Inv(rows_, cols_);
-    for (int i = 0; i < rows_; i++) {
-        for ( int j = 0; j < cols_; j++){
-            Inv.p[i] [j] = sqrt(p[i][j]);
-        }
-     }
-    return Inv;
-}
+        //Change diagonal item U ( j, j ) = 0 to "small" value before the devision
+        if (U(j, j) == 0.0)
+            U(j, j) = MIN_FLOAT;
 
+        //Actualize U (i, j) from diagonal items
+        if (j != columns_count - 1)
+        {
+            const double val = 1.0 / U(j, j);
 
-/* PRIVATE HELPER FUNCTIONS
- ********************************/
-
-void Matrix::allocSpace()
-{
-    p = new double*[rows_];
-    for (int i = 0; i < rows_; ++i) {
-        p[i] = new double[cols_];
-    }
-}
-
-Matrix Matrix::expHelper(const Matrix& m, int num)
-{
-    if (num == 0) { 
-        return createIdentity(m.rows_);
-    } else if (num == 1) {
-        return m;
-    } else if (num % 2 == 0) {  // num is even
-        return expHelper(m * m, num/2);
-    } else {                    // num is odd
-        return m * expHelper(m * m, (num-1)/2);
-    }
-}
-
-/* NON-MEMBER FUNCTIONS
- ********************************/
-
-Matrix operator+(const Matrix& m1, const Matrix& m2)
-{
-    Matrix temp(m1);
-    return (temp += m2);
-}
-
-Matrix operator-(const Matrix& m1, const Matrix& m2)
-{
-    Matrix temp(m1);
-    return (temp -= m2);
-}
-
-Matrix operator*(const Matrix& m1, const Matrix& m2)
-{
-    Matrix temp(m1);
-    return (temp *= m2);
-}
-
-Matrix operator*(const Matrix& m, double num)
-{
-    Matrix temp(m);
-    return (temp *= num);
-}
-
-Matrix operator*(double num, const Matrix& m)
-{
-    return (m * num);
-}
-
-Matrix operator/(const Matrix& m, double num)
-{
-    Matrix temp(m);
-    return (temp /= num);
-}
-
-Matrix operator|(const Matrix& m1, const Matrix& m2)
-{
-    Matrix temp(m1);
-    auto[m, n]=m1.size();
-    for ( int i = 0; i < m; i++ ) {
-        for ( unsigned int j = 0; j < n; j++ ) {
-            temp(i, j) = m1(i, j) * m2(i, j);
+            for (unsigned int i = j + 1; i < columns_count; i++)
+                U(i, j) *= val;
         }
     }
-    return temp;
+
+    //Process L matrix together with U matrix
+    for (unsigned int i = 0; i < columns_count; i++)
+    {
+        for (unsigned int j = 0; j < i; j++)
+        {
+            L(i, j) = U(i, j);
+            U(i, j) = 0.0;
+        }
+
+        //Actualize permutation matrix from the row permutation matrix
+        P(i, PR(0, i)) = 1.0;
+    }
 }
 
-ostream& operator<<(ostream& os, const Matrix& m)
+
+Matrix Matrix::inv() const
 {
-    for (int i = 0; i < m.rows_; ++i) {
-        os << m.p[i][0];
-        for (int j = 1; j < m.cols_; ++j) {
-            os << " " << m.p[i][j];
-        }
-        os << endl;
+    //Inverse matrix calculation using LU decomposition
+    //Rectangular matrix
+    if (rows_count != columns_count)
+    {
+        throw std::invalid_argument ("Exception: invalid dimension of the matrix (rectangle matrix), can not perform LU decomposition.");
     }
-    return os;
+
+    //Find maximum
+    auto [max_val, row, col] = this->max();
+
+    if (max_val > MAX_FLOAT)
+        throw std::overflow_error ("Exception: bad scaled matrix, can not compute inverse matrix, max item > MAX_FLOAT.");
+
+     //Create LU decomposition
+     Matrix  L(rows_count, rows_count);
+     Matrix  U(rows_count, rows_count);
+     Matrix  P(rows_count, rows_count, 0, 1);
+     short sign = 1;
+     lu(L, U, P, sign);
+
+     //Compute X = L^-1 (lower triangular matrix)
+     Matrix  X(rows_count, rows_count);
+
+     for (unsigned int j = 0; j < rows_count; j++)
+     {
+        X(j, j) = 1.0;
+
+        for (unsigned int i = j + 1; i < rows_count; i++)
+        {
+            double sum = 0;
+
+            for (unsigned int k = j; k <= i - 1; k++)
+            {
+                sum -= L(i, k) * X(k, j);
+            }
+
+            X(i, j) = sum;
+        }
+    }
+
+    //Compute Y = U^-1 (upper triangular matrix)
+    Matrix  Y(rows_count, rows_count);
+
+    for (unsigned int j = 0; j < rows_count; j++)
+    {
+        Y(j, j) = 1 / U(j, j);
+
+        for (int i = j - 1; i >= 0; i--)
+        {
+            double sum = 0.0;
+
+            for (unsigned int k = i + 1; k <= j; k++)
+            {
+                sum -= U(i, k) * Y(k, j) / U(i, i);
+            }
+
+            Y(i, j) = sum;
+        }
+    }
+
+    //Compute inverse matrix A^-1 = U^-1 * L^-1 = X * Y * P
+    return Y * X * P;
 }
 
-istream& operator>>(istream& is, Matrix& m)
+
+//NON-member functions
+//**************************************************
+
+//Matrix operators + : Matrix + Matrix
+Matrix operator + ( const Matrix &A, const Matrix &B )
 {
-    for (int i = 0; i < m.rows_; ++i) {
-        for (int j = 0; j < m.cols_; ++j) {
-            is >> m.p[i][j];
+    Matrix temp(A);
+    return (temp += B);
+}
+
+
+//Matrix operators - : Matrix - Matrix
+Matrix operator - ( const Matrix &A, const Matrix &B )
+{
+    Matrix temp(A);
+    return (temp -= B);
+}
+
+
+//Matrix operator * : Matrix * Scalar
+Matrix operator * (const Matrix &A, const double val )
+{
+    Matrix temp(A);
+    return (temp *= val);
+}
+
+Matrix operator * ( const Matrix &A,  const Matrix &B)
+{
+    //Matrix operator *= : Matrix *= Matrix
+    if ( A.cols() !=  B.rows() )
+        throw std::invalid_argument ( "Exception: different rows and columns count. Cannot compute A *= B.");
+
+    Matrix C ( A.rows(), B.cols() );
+
+    //Matrix multiplication
+    for (unsigned int i = 0; i < A.rows(); i++)
+    {
+        for (unsigned int k = 0; k < A.cols(); k++)
+        {
+            for (unsigned int j = 0; j < B.cols(); j++)
+            {
+                C(i, j) += A(i, k) * B(k, j);
+            }
         }
     }
-    return is;
+
+    return C;
+}
+
+
+//Matrix operator * : Scalar * Matrix
+Matrix operator * (const double val, const Matrix &A)
+{
+    Matrix temp(A);
+    return (temp *= val);
+}
+
+//Matrix operator / : Matrix / Scalar
+Matrix operator / (const Matrix &A, const double val )
+{
+    Matrix temp(A);
+    return (temp /= val);
+}
+
+
+//Matrix operator | : Matrix | Matrix (Hadamard product)
+Matrix operator | (const Matrix &A, const Matrix &B )
+{
+    Matrix temp(A);
+    return (temp |= B);
 }

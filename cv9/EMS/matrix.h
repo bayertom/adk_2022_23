@@ -5,68 +5,91 @@
 #ifndef __MATRIX_H__
 #define __MATRIX_H__
 
-#include <iostream>
 #include <tuple>
+#include <vector>
+#include <ostream>
+#include <iostream>
+#include <iomanip>
 
-class Matrix {
+class Matrix
+{
+private:
+    std::vector<std::vector<double>> items;				//Matrix items
+    unsigned int rows_count;			                //Total rows_count
+    unsigned int columns_count;			                //Total columns_count
 
-    private:
-        int rows_, cols_;
-        double **p;
+public:
+    //Matrix() : rows_count (1), columns_count (1), items ( 1, std::vector ( 1, 0.0 ) ) {};
+    Matrix ( const unsigned int rows_count_, const unsigned int columns_count_, const double item = 0 ) : rows_count ( rows_count_ ), columns_count ( columns_count_ ), items ( rows_count_, std::vector ( columns_count_, item ) ) {}
+    Matrix ( const unsigned int rows_count_, const unsigned int columns_count_, const double non_diag_item_val, const double diag_val );
 
-    public:
-        Matrix(int, int);
-        Matrix(double**, int, int);
-        Matrix();
-        ~Matrix();
-        Matrix(const Matrix&);
-        Matrix& operator=(const Matrix&);
+public:
 
-        inline double& operator() (int x, int y) const { return p[x][y]; }
+    //Get rows and columns count
+    inline unsigned int rows() const {return rows_count;}
+    inline unsigned int cols() const {return columns_count;}
+    inline std::tuple <unsigned int, unsigned int> size() const{return {rows_count, columns_count};}
 
-        Matrix& operator+=(const Matrix&);
-        Matrix& operator-=(const Matrix&);
-        Matrix& operator*=(const Matrix&);
-        Matrix& operator*=(double);
-        Matrix& operator/=(double);
-        Matrix  operator^(int);
-        
-        friend std::ostream& operator<<(std::ostream&, const Matrix&);
-        friend std::istream& operator>>(std::istream&, Matrix&);
+    //Get row, col
+    Matrix row ( const unsigned int r ) const;
+    Matrix col ( const unsigned int c ) const;
 
-        std::tuple<int, int> size() const{return {rows_, cols_};}
-        void swapRows(int, int);
-        Matrix transpose();
-        Matrix diff();
-        double mean();
+    //Set row, col, submatrix
+    void row ( const Matrix & R, const unsigned int r );
+    void col ( const Matrix & C, const unsigned int c );
 
-        static Matrix createIdentity(int);
-        static Matrix solve(Matrix, Matrix);
-        static Matrix bandSolve(Matrix, Matrix, int);
+    //Matrix operations
+    Matrix trans();
+    Matrix diff() const;
+    double mean() const;
+    std::tuple<double, int, int> min() const;
+    std::tuple<double, int, int> max() const;
+    Matrix sqrtm() const;
+    void lu(Matrix &L, Matrix &U, Matrix &P, short &sign) const;
+    Matrix inv() const;
 
-        // functions on vectors
-        static double dotProduct(Matrix, Matrix);
+    //Other methods
+    void print (std::ostream * output = &std::cout) const;
 
-        // functions on augmented matrices
-        static Matrix augment(Matrix, Matrix);
-        Matrix gaussianEliminate();
-        Matrix rowReduceFromGaussian();
-        void readSolutionsFromRREF(std::ostream& os);
-        Matrix inverse();
-        Matrix sqrtm();
+public:
 
-    private:
+    Matrix & operator =  (const Matrix &M);
+    Matrix & operator += (const Matrix &M);
+    Matrix & operator -= (const Matrix &M);
+    Matrix & operator *= (const Matrix &M);
+    Matrix & operator *= (const double val);
+    Matrix & operator /= (const double val);
+    Matrix & operator |= (const Matrix & M);
 
-        void allocSpace();
-        Matrix expHelper(const Matrix&, int);
+    //Matrix operator (row, col)
+    double & operator() ( const unsigned int row, const unsigned int col );
+    double const & operator() ( const unsigned int row, const unsigned int col ) const;
+
+    //Matrix operator (row1, col1, row2, col2)
+    Matrix operator () ( const unsigned int r1, const unsigned int r2,
+                                const unsigned int c1, const unsigned int c2 ) const;
+
+    //Matrix operator (M, r, c): replace part of the matrix A with M
+    void operator () (const Matrix  &M, const unsigned int row, const unsigned int col);
 };
 
-Matrix operator+(const Matrix&, const Matrix&);
-Matrix operator-(const Matrix&, const Matrix&);
-Matrix operator*(const Matrix&, const Matrix&);
-Matrix operator*(const Matrix&, double);
-Matrix operator*(double, const Matrix&);
-Matrix operator/(const Matrix&, double);
-Matrix operator|(const Matrix& m1, const Matrix& m2);
+//Matrix operator + : Matrix + Matrix
+Matrix operator + (const Matrix &A, const Matrix &B);
+
+//Matrix operator - : Matrix - Matrix
+Matrix operator - (const Matrix &A, const Matrix &B);
+
+//Matrix operator * : Matrix * Matrix
+Matrix operator * (const Matrix &A, const Matrix &B);
+
+//Multiply matrix with a scalar
+Matrix operator * (const double val, const Matrix &A);
+Matrix operator * (const Matrix &A, const double val);
+
+//Divide matrix with a scalar
+Matrix operator / (const Matrix &A, double);
+
+//Hadamard product
+Matrix operator | (const Matrix &A, const Matrix &B);
 
 #endif
