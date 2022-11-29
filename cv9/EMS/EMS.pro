@@ -20,13 +20,17 @@ SOURCES += \
     draw.cpp \
     main.cpp \
     mainform.cpp \
-    matrix.cpp
+    matrix.cpp \
+    sortpointsbyx.cpp \
+    sortpointsbyy.cpp
 
 HEADERS += \
     algorithms.h \
     draw.h \
     mainform.h \
-    matrix.h
+    matrix.h \
+    sortpointsbyx.h \
+    sortpointsbyy.h
 
 FORMS += \
     mainform.ui

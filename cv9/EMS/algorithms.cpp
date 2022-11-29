@@ -95,13 +95,115 @@ std::tuple<int, double, double, double> Algorithms::getNearestLineSegmentPoint(d
     return {imin, dmin, xn, yn};
 }
 
+Matrix Algorithms::createA(double alfa, double beta, double gamma, double h, int n)
+{
+    // Create definition atrix of spline of minimum energy spline
+    double h2= h*h;
+    double h4 = h2*h2;
+
+    double a = alfa + 2*beta/h2 + 6*gamma/h4;
+    double b = - beta/h2 - 4*gamma/h4;
+    double c = gamma/h4;
+
+    //Create matrix A
+    Matrix A(n,n);
+
+    for (int i = 0; i<n; i++)
+    {
+        //main diagonal
+        A(i,i) = a;
+
+        //Non-diagonal elements
+        if(i<n-1)
+        {
+            A(i,i+1) = b;
+            A(i+1,i) = b;
+        }
+
+        //Non-diagonal elements
+        if(i<n-2)
+        {
+            A(i,i+2) = c;
+            A(i+2,i) = c;
+        }
+    }
+    return A;
+}
+
+std::vector<QPointF> Algorithms::minEnregySpline1Element1Barrier(std::vector<QPointF> element,std::vector<QPointF> barrier, double alfa, double beta, double gamma, double lambda, double dmin, int iter)
+{
+    //Create minimum energy spline: 1 simplified element, 1 barrier
+    int ne = element.size();
+    int nb = barrier.size();
+
+    //Create supplementary matrices
+    Matrix Xe(ne,1), Ye(ne,1);
+    Matrix Xb(nb,1), Yb(nb,1);
+
+    //Initaliaze Xe, Ye matrices
+    for(int i = 0; i<ne; i++)
+    {
+        Xe(i,0)=element[i].x();
+        Ye(i,0)=element[i].y();
+    }
+
+    //Initaliaze Xb, Yb matrices
+    for(int i = 0; i<nb; i++)
+    {
+        Xb(i,0)=barrier[i].x();
+        Yb(i,0)=barrier[i].y();
+    }
+
+    // Coordinate differencies and step
+    Matrix hX = Xe.diff();
+    Matrix hY = Ye.diff();
+    Matrix hXY = (hX|hX + hY|hY).sqrtm(); //Hadamard product .*
+    double h = hXY.mean();
+
+    //create matrix A
+    Matrix A = createA(alfa, beta, gamma, h, ne);
+
+    //Create invers matrix
+    Matrix I(ne,ne,0,1);
+    Matrix AI = (A + lambda * I).inv();
+
+    // Coordinate differencies
+    Matrix DXe(ne,1), DYe(ne,1);
+
+    // Outer energy matrices
+    Matrix Ex(ne,1), Ey(ne,1);
+
+    //Main iteration
 
 
+}
 
 
+double Algorithms::getEx(double x, double y, double xn, double yn, double dmin)
+{
+    // Partial derivative according of outer energy to x
+    double c = 2*dmin;
 
+    double d = getEuclDistance(x,y,xn,yn);
 
+    if (d < dmin)
+       return -c*(x-xn)/(d*dmin);
 
+    return 0;
+}
+
+double Algorithms::getEy(double x, double y, double xn, double yn, double dmin)
+{
+    // Partial derivative according of outer energy to x
+    double c = 2*dmin;
+
+    double d = getEuclDistance(x,y,xn,yn);
+
+    if (d < dmin)
+       return -c*(y-yn)/(d*dmin);
+
+    return 0;
+}
 
 
 
