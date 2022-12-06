@@ -7,7 +7,7 @@
 *****************************************************************************/
 
 #include <memory>
-#include "../../DTM/draw.h"
+#include "../../../../adk_old/Ulohy/ADK2022/SK1/adk_2022_23/adk_ukol3/DTM/draw.h"
 #include <QtGui/qtextcursor.h>
 #include <QScreen>
 #include <QtCore/qbytearray.h>

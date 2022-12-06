@@ -1,4 +1,5 @@
 debug/algorithms.o
+debug/csv.o
 debug/draw.o
 debug/edge.o
 debug/main.o

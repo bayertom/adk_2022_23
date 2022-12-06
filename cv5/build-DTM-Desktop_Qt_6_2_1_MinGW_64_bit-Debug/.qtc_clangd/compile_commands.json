@@ -9,7 +9,7 @@
         "-I",
         "C:\\Qt\\Tools\\QtCreator\\share\\qtcreator\\cplusplus\\wrappedQtHeaders\\QtCore",
         "-I",
-        "C:\\Users\\Tomáš\\AppData\\Local\\Temp\\QtCreator-hhIQCi\\clang-uiheader-poGBNA",
+        "C:\\Users\\Tomáš\\AppData\\Local\\Temp\\QtCreator-CCSZfV\\clang-uiheader-QDhPLs",
         "-nostdinc",
         "-nostdinc++",
         "-g",
@@ -34,7 +34,7 @@
         "-DQT_CORE_LIB",
         "-DQT_NEEDS_QMAIN",
         "-I",
-        "E:\\Tomas\\CPP\\adk_2022_23\\cv5\\DTM",
+        "E:\\Tomas\\CPP\\adk_old\\Ulohy\\ADK2022\\SK1\\adk_2022_23\\adk_ukol3\\DTM",
         "-I",
         "C:\\Qt\\6.2.1\\mingw81_64\\include",
         "-I",
@@ -70,10 +70,10 @@
         "-Wno-unknown-warning-option",
         "-Wno-documentation-unknown-command",
         "-fno-delayed-template-parsing",
-        "E:\\Tomas\\CPP\\adk_2022_23\\cv5\\DTM\\algorithms.cpp"
+        "E:\\Tomas\\CPP\\adk_old\\Ulohy\\ADK2022\\SK1\\adk_2022_23\\adk_ukol3\\DTM\\algorithms.cpp"
     ],
     "directory": "E:/Tomas/CPP/adk_2022_23/cv5/build-DTM-Desktop_Qt_6_2_1_MinGW_64_bit-Debug/.qtc_clangd",
-    "file": "E:/Tomas/CPP/adk_2022_23/cv5/DTM/algorithms.cpp"
+    "file": "E:/Tomas/CPP/adk_old/Ulohy/ADK2022/SK1/adk_2022_23/adk_ukol3/DTM/algorithms.cpp"
 },
 {
     "arguments": [
@@ -85,7 +85,7 @@
         "-I",
         "C:\\Qt\\Tools\\QtCreator\\share\\qtcreator\\cplusplus\\wrappedQtHeaders\\QtCore",
         "-I",
-        "C:\\Users\\Tomáš\\AppData\\Local\\Temp\\QtCreator-hhIQCi\\clang-uiheader-poGBNA",
+        "C:\\Users\\Tomáš\\AppData\\Local\\Temp\\QtCreator-CCSZfV\\clang-uiheader-QDhPLs",
         "-nostdinc",
         "-nostdinc++",
         "-g",
@@ -110,7 +110,7 @@
         "-DQT_CORE_LIB",
         "-DQT_NEEDS_QMAIN",
         "-I",
-        "E:\\Tomas\\CPP\\adk_2022_23\\cv5\\DTM",
+        "E:\\Tomas\\CPP\\adk_old\\Ulohy\\ADK2022\\SK1\\adk_2022_23\\adk_ukol3\\DTM",
         "-I",
         "C:\\Qt\\6.2.1\\mingw81_64\\include",
         "-I",
@@ -146,10 +146,10 @@
         "-Wno-unknown-warning-option",
         "-Wno-documentation-unknown-command",
         "-fno-delayed-template-parsing",
-        "E:\\Tomas\\CPP\\adk_2022_23\\cv5\\DTM\\draw.cpp"
+        "E:\\Tomas\\CPP\\adk_old\\Ulohy\\ADK2022\\SK1\\adk_2022_23\\adk_ukol3\\DTM\\csv.cpp"
     ],
     "directory": "E:/Tomas/CPP/adk_2022_23/cv5/build-DTM-Desktop_Qt_6_2_1_MinGW_64_bit-Debug/.qtc_clangd",
-    "file": "E:/Tomas/CPP/adk_2022_23/cv5/DTM/draw.cpp"
+    "file": "E:/Tomas/CPP/adk_old/Ulohy/ADK2022/SK1/adk_2022_23/adk_ukol3/DTM/csv.cpp"
 },
 {
     "arguments": [
@@ -161,7 +161,7 @@
         "-I",
         "C:\\Qt\\Tools\\QtCreator\\share\\qtcreator\\cplusplus\\wrappedQtHeaders\\QtCore",
         "-I",
-        "C:\\Users\\Tomáš\\AppData\\Local\\Temp\\QtCreator-hhIQCi\\clang-uiheader-poGBNA",
+        "C:\\Users\\Tomáš\\AppData\\Local\\Temp\\QtCreator-CCSZfV\\clang-uiheader-QDhPLs",
         "-nostdinc",
         "-nostdinc++",
         "-g",
@@ -186,7 +186,7 @@
         "-DQT_CORE_LIB",
         "-DQT_NEEDS_QMAIN",
         "-I",
-        "E:\\Tomas\\CPP\\adk_2022_23\\cv5\\DTM",
+        "E:\\Tomas\\CPP\\adk_old\\Ulohy\\ADK2022\\SK1\\adk_2022_23\\adk_ukol3\\DTM",
         "-I",
         "C:\\Qt\\6.2.1\\mingw81_64\\include",
         "-I",
@@ -222,10 +222,10 @@
         "-Wno-unknown-warning-option",
         "-Wno-documentation-unknown-command",
         "-fno-delayed-template-parsing",
-        "E:\\Tomas\\CPP\\adk_2022_23\\cv5\\DTM\\edge.cpp"
+        "E:\\Tomas\\CPP\\adk_old\\Ulohy\\ADK2022\\SK1\\adk_2022_23\\adk_ukol3\\DTM\\draw.cpp"
     ],
     "directory": "E:/Tomas/CPP/adk_2022_23/cv5/build-DTM-Desktop_Qt_6_2_1_MinGW_64_bit-Debug/.qtc_clangd",
-    "file": "E:/Tomas/CPP/adk_2022_23/cv5/DTM/edge.cpp"
+    "file": "E:/Tomas/CPP/adk_old/Ulohy/ADK2022/SK1/adk_2022_23/adk_ukol3/DTM/draw.cpp"
 },
 {
     "arguments": [
@@ -237,7 +237,7 @@
         "-I",
         "C:\\Qt\\Tools\\QtCreator\\share\\qtcreator\\cplusplus\\wrappedQtHeaders\\QtCore",
         "-I",
-        "C:\\Users\\Tomáš\\AppData\\Local\\Temp\\QtCreator-hhIQCi\\clang-uiheader-poGBNA",
+        "C:\\Users\\Tomáš\\AppData\\Local\\Temp\\QtCreator-CCSZfV\\clang-uiheader-QDhPLs",
         "-nostdinc",
         "-nostdinc++",
         "-g",
@@ -262,7 +262,7 @@
         "-DQT_CORE_LIB",
         "-DQT_NEEDS_QMAIN",
         "-I",
-        "E:\\Tomas\\CPP\\adk_2022_23\\cv5\\DTM",
+        "E:\\Tomas\\CPP\\adk_old\\Ulohy\\ADK2022\\SK1\\adk_2022_23\\adk_ukol3\\DTM",
         "-I",
         "C:\\Qt\\6.2.1\\mingw81_64\\include",
         "-I",
@@ -298,10 +298,10 @@
         "-Wno-unknown-warning-option",
         "-Wno-documentation-unknown-command",
         "-fno-delayed-template-parsing",
-        "E:\\Tomas\\CPP\\adk_2022_23\\cv5\\DTM\\main.cpp"
+        "E:\\Tomas\\CPP\\adk_old\\Ulohy\\ADK2022\\SK1\\adk_2022_23\\adk_ukol3\\DTM\\edge.cpp"
     ],
     "directory": "E:/Tomas/CPP/adk_2022_23/cv5/build-DTM-Desktop_Qt_6_2_1_MinGW_64_bit-Debug/.qtc_clangd",
-    "file": "E:/Tomas/CPP/adk_2022_23/cv5/DTM/main.cpp"
+    "file": "E:/Tomas/CPP/adk_old/Ulohy/ADK2022/SK1/adk_2022_23/adk_ukol3/DTM/edge.cpp"
 },
 {
     "arguments": [
@@ -313,7 +313,7 @@
         "-I",
         "C:\\Qt\\Tools\\QtCreator\\share\\qtcreator\\cplusplus\\wrappedQtHeaders\\QtCore",
         "-I",
-        "C:\\Users\\Tomáš\\AppData\\Local\\Temp\\QtCreator-hhIQCi\\clang-uiheader-poGBNA",
+        "C:\\Users\\Tomáš\\AppData\\Local\\Temp\\QtCreator-CCSZfV\\clang-uiheader-QDhPLs",
         "-nostdinc",
         "-nostdinc++",
         "-g",
@@ -338,7 +338,7 @@
         "-DQT_CORE_LIB",
         "-DQT_NEEDS_QMAIN",
         "-I",
-        "E:\\Tomas\\CPP\\adk_2022_23\\cv5\\DTM",
+        "E:\\Tomas\\CPP\\adk_old\\Ulohy\\ADK2022\\SK1\\adk_2022_23\\adk_ukol3\\DTM",
         "-I",
         "C:\\Qt\\6.2.1\\mingw81_64\\include",
         "-I",
@@ -374,10 +374,10 @@
         "-Wno-unknown-warning-option",
         "-Wno-documentation-unknown-command",
         "-fno-delayed-template-parsing",
-        "E:\\Tomas\\CPP\\adk_2022_23\\cv5\\DTM\\mainform.cpp"
+        "E:\\Tomas\\CPP\\adk_old\\Ulohy\\ADK2022\\SK1\\adk_2022_23\\adk_ukol3\\DTM\\main.cpp"
     ],
     "directory": "E:/Tomas/CPP/adk_2022_23/cv5/build-DTM-Desktop_Qt_6_2_1_MinGW_64_bit-Debug/.qtc_clangd",
-    "file": "E:/Tomas/CPP/adk_2022_23/cv5/DTM/mainform.cpp"
+    "file": "E:/Tomas/CPP/adk_old/Ulohy/ADK2022/SK1/adk_2022_23/adk_ukol3/DTM/main.cpp"
 },
 {
     "arguments": [
@@ -389,7 +389,7 @@
         "-I",
         "C:\\Qt\\Tools\\QtCreator\\share\\qtcreator\\cplusplus\\wrappedQtHeaders\\QtCore",
         "-I",
-        "C:\\Users\\Tomáš\\AppData\\Local\\Temp\\QtCreator-hhIQCi\\clang-uiheader-poGBNA",
+        "C:\\Users\\Tomáš\\AppData\\Local\\Temp\\QtCreator-CCSZfV\\clang-uiheader-QDhPLs",
         "-nostdinc",
         "-nostdinc++",
         "-g",
@@ -414,7 +414,7 @@
         "-DQT_CORE_LIB",
         "-DQT_NEEDS_QMAIN",
         "-I",
-        "E:\\Tomas\\CPP\\adk_2022_23\\cv5\\DTM",
+        "E:\\Tomas\\CPP\\adk_old\\Ulohy\\ADK2022\\SK1\\adk_2022_23\\adk_ukol3\\DTM",
         "-I",
         "C:\\Qt\\6.2.1\\mingw81_64\\include",
         "-I",
@@ -450,10 +450,10 @@
         "-Wno-unknown-warning-option",
         "-Wno-documentation-unknown-command",
         "-fno-delayed-template-parsing",
-        "E:\\Tomas\\CPP\\adk_2022_23\\cv5\\DTM\\qpoint3d.cpp"
+        "E:\\Tomas\\CPP\\adk_old\\Ulohy\\ADK2022\\SK1\\adk_2022_23\\adk_ukol3\\DTM\\mainform.cpp"
     ],
     "directory": "E:/Tomas/CPP/adk_2022_23/cv5/build-DTM-Desktop_Qt_6_2_1_MinGW_64_bit-Debug/.qtc_clangd",
-    "file": "E:/Tomas/CPP/adk_2022_23/cv5/DTM/qpoint3d.cpp"
+    "file": "E:/Tomas/CPP/adk_old/Ulohy/ADK2022/SK1/adk_2022_23/adk_ukol3/DTM/mainform.cpp"
 },
 {
     "arguments": [
@@ -465,7 +465,7 @@
         "-I",
         "C:\\Qt\\Tools\\QtCreator\\share\\qtcreator\\cplusplus\\wrappedQtHeaders\\QtCore",
         "-I",
-        "C:\\Users\\Tomáš\\AppData\\Local\\Temp\\QtCreator-hhIQCi\\clang-uiheader-poGBNA",
+        "C:\\Users\\Tomáš\\AppData\\Local\\Temp\\QtCreator-CCSZfV\\clang-uiheader-QDhPLs",
         "-nostdinc",
         "-nostdinc++",
         "-g",
@@ -490,7 +490,7 @@
         "-DQT_CORE_LIB",
         "-DQT_NEEDS_QMAIN",
         "-I",
-        "E:\\Tomas\\CPP\\adk_2022_23\\cv5\\DTM",
+        "E:\\Tomas\\CPP\\adk_old\\Ulohy\\ADK2022\\SK1\\adk_2022_23\\adk_ukol3\\DTM",
         "-I",
         "C:\\Qt\\6.2.1\\mingw81_64\\include",
         "-I",
@@ -526,10 +526,10 @@
         "-Wno-unknown-warning-option",
         "-Wno-documentation-unknown-command",
         "-fno-delayed-template-parsing",
-        "E:\\Tomas\\CPP\\adk_2022_23\\cv5\\DTM\\settings.cpp"
+        "E:\\Tomas\\CPP\\adk_old\\Ulohy\\ADK2022\\SK1\\adk_2022_23\\adk_ukol3\\DTM\\qpoint3d.cpp"
     ],
     "directory": "E:/Tomas/CPP/adk_2022_23/cv5/build-DTM-Desktop_Qt_6_2_1_MinGW_64_bit-Debug/.qtc_clangd",
-    "file": "E:/Tomas/CPP/adk_2022_23/cv5/DTM/settings.cpp"
+    "file": "E:/Tomas/CPP/adk_old/Ulohy/ADK2022/SK1/adk_2022_23/adk_ukol3/DTM/qpoint3d.cpp"
 },
 {
     "arguments": [
@@ -541,7 +541,7 @@
         "-I",
         "C:\\Qt\\Tools\\QtCreator\\share\\qtcreator\\cplusplus\\wrappedQtHeaders\\QtCore",
         "-I",
-        "C:\\Users\\Tomáš\\AppData\\Local\\Temp\\QtCreator-hhIQCi\\clang-uiheader-poGBNA",
+        "C:\\Users\\Tomáš\\AppData\\Local\\Temp\\QtCreator-CCSZfV\\clang-uiheader-QDhPLs",
         "-nostdinc",
         "-nostdinc++",
         "-g",
@@ -566,7 +566,7 @@
         "-DQT_CORE_LIB",
         "-DQT_NEEDS_QMAIN",
         "-I",
-        "E:\\Tomas\\CPP\\adk_2022_23\\cv5\\DTM",
+        "E:\\Tomas\\CPP\\adk_old\\Ulohy\\ADK2022\\SK1\\adk_2022_23\\adk_ukol3\\DTM",
         "-I",
         "C:\\Qt\\6.2.1\\mingw81_64\\include",
         "-I",
@@ -602,10 +602,10 @@
         "-Wno-unknown-warning-option",
         "-Wno-documentation-unknown-command",
         "-fno-delayed-template-parsing",
-        "E:\\Tomas\\CPP\\adk_2022_23\\cv5\\DTM\\triangle.cpp"
+        "E:\\Tomas\\CPP\\adk_old\\Ulohy\\ADK2022\\SK1\\adk_2022_23\\adk_ukol3\\DTM\\settings.cpp"
     ],
     "directory": "E:/Tomas/CPP/adk_2022_23/cv5/build-DTM-Desktop_Qt_6_2_1_MinGW_64_bit-Debug/.qtc_clangd",
-    "file": "E:/Tomas/CPP/adk_2022_23/cv5/DTM/triangle.cpp"
+    "file": "E:/Tomas/CPP/adk_old/Ulohy/ADK2022/SK1/adk_2022_23/adk_ukol3/DTM/settings.cpp"
 },
 {
     "arguments": [
@@ -617,7 +617,7 @@
         "-I",
         "C:\\Qt\\Tools\\QtCreator\\share\\qtcreator\\cplusplus\\wrappedQtHeaders\\QtCore",
         "-I",
-        "C:\\Users\\Tomáš\\AppData\\Local\\Temp\\QtCreator-hhIQCi\\clang-uiheader-poGBNA",
+        "C:\\Users\\Tomáš\\AppData\\Local\\Temp\\QtCreator-CCSZfV\\clang-uiheader-QDhPLs",
         "-nostdinc",
         "-nostdinc++",
         "-g",
@@ -642,7 +642,83 @@
         "-DQT_CORE_LIB",
         "-DQT_NEEDS_QMAIN",
         "-I",
-        "E:\\Tomas\\CPP\\adk_2022_23\\cv5\\DTM",
+        "E:\\Tomas\\CPP\\adk_old\\Ulohy\\ADK2022\\SK1\\adk_2022_23\\adk_ukol3\\DTM",
+        "-I",
+        "C:\\Qt\\6.2.1\\mingw81_64\\include",
+        "-I",
+        "C:\\Qt\\6.2.1\\mingw81_64\\include\\QtWidgets",
+        "-I",
+        "C:\\Qt\\6.2.1\\mingw81_64\\include\\QtGui",
+        "-I",
+        "C:\\Qt\\6.2.1\\mingw81_64\\include\\QtCore",
+        "-I",
+        "E:\\Tomas\\CPP\\adk_2022_23\\cv5\\build-DTM-Desktop_Qt_6_2_1_MinGW_64_bit-Debug\\debug",
+        "-I",
+        "E:\\Tomas\\CPP\\adk_2022_23\\cv5\\build-DTM-Desktop_Qt_6_2_1_MinGW_64_bit-Debug",
+        "-I",
+        "C:\\Qt\\6.2.1\\mingw81_64\\mkspecs\\win32-g++",
+        "-isystem",
+        "C:\\Qt\\Tools\\mingw810_64\\lib\\gcc\\x86_64-w64-mingw32\\8.1.0\\include\\c++",
+        "-isystem",
+        "C:\\Qt\\Tools\\mingw810_64\\lib\\gcc\\x86_64-w64-mingw32\\8.1.0\\include\\c++\\x86_64-w64-mingw32",
+        "-isystem",
+        "C:\\Qt\\Tools\\mingw810_64\\lib\\gcc\\x86_64-w64-mingw32\\8.1.0\\include\\c++\\backward",
+        "-isystem",
+        "C:\\Qt\\Tools\\QtCreator\\bin\\clang\\lib\\clang\\14.0.0\\include",
+        "-isystem",
+        "C:\\Qt\\Tools\\mingw810_64\\x86_64-w64-mingw32\\include",
+        "-fmessage-length=0",
+        "-fdiagnostics-show-note-include-stack",
+        "-fretain-comments-from-system-headers",
+        "-fmacro-backtrace-limit=0",
+        "-ferror-limit=1000",
+        "-x",
+        "c++",
+        "-Wno-unknown-pragmas",
+        "-Wno-unknown-warning-option",
+        "-Wno-documentation-unknown-command",
+        "-fno-delayed-template-parsing",
+        "E:\\Tomas\\CPP\\adk_old\\Ulohy\\ADK2022\\SK1\\adk_2022_23\\adk_ukol3\\DTM\\triangle.cpp"
+    ],
+    "directory": "E:/Tomas/CPP/adk_2022_23/cv5/build-DTM-Desktop_Qt_6_2_1_MinGW_64_bit-Debug/.qtc_clangd",
+    "file": "E:/Tomas/CPP/adk_old/Ulohy/ADK2022/SK1/adk_2022_23/adk_ukol3/DTM/triangle.cpp"
+},
+{
+    "arguments": [
+        "clang",
+        "-I",
+        "C:\\Qt\\Tools\\QtCreator\\share\\qtcreator\\cplusplus\\wrappedMingwHeaders",
+        "-I",
+        "C:\\Qt\\Tools\\QtCreator\\share\\qtcreator\\cplusplus\\wrappedQtHeaders",
+        "-I",
+        "C:\\Qt\\Tools\\QtCreator\\share\\qtcreator\\cplusplus\\wrappedQtHeaders\\QtCore",
+        "-I",
+        "C:\\Users\\Tomáš\\AppData\\Local\\Temp\\QtCreator-CCSZfV\\clang-uiheader-QDhPLs",
+        "-nostdinc",
+        "-nostdinc++",
+        "-g",
+        "-std=gnu++1z",
+        "-Wall",
+        "-Wextra",
+        "-Wextra",
+        "-fexceptions",
+        "-mthreads",
+        "-fsyntax-only",
+        "-m64",
+        "--target=x86_64-w64-mingw32",
+        "-DQ_CREATOR_RUN",
+        "-DUNICODE",
+        "-D_UNICODE",
+        "-DWIN32",
+        "-DMINGW_HAS_SECURE_API",
+        "-DQT_DEPRECATED_WARNINGS",
+        "-DQT_QML_DEBUG",
+        "-DQT_WIDGETS_LIB",
+        "-DQT_GUI_LIB",
+        "-DQT_CORE_LIB",
+        "-DQT_NEEDS_QMAIN",
+        "-I",
+        "E:\\Tomas\\CPP\\adk_old\\Ulohy\\ADK2022\\SK1\\adk_2022_23\\adk_ukol3\\DTM",
         "-I",
         "C:\\Qt\\6.2.1\\mingw81_64\\include",
         "-I",
@@ -678,10 +754,10 @@
         "-Wno-unknown-warning-option",
         "-Wno-documentation-unknown-command",
         "-fno-delayed-template-parsing",
-        "E:\\Tomas\\CPP\\adk_2022_23\\cv5\\DTM\\algorithms.h"
+        "E:\\Tomas\\CPP\\adk_old\\Ulohy\\ADK2022\\SK1\\adk_2022_23\\adk_ukol3\\DTM\\algorithms.h"
     ],
     "directory": "E:/Tomas/CPP/adk_2022_23/cv5/build-DTM-Desktop_Qt_6_2_1_MinGW_64_bit-Debug/.qtc_clangd",
-    "file": "E:/Tomas/CPP/adk_2022_23/cv5/DTM/algorithms.h"
+    "file": "E:/Tomas/CPP/adk_old/Ulohy/ADK2022/SK1/adk_2022_23/adk_ukol3/DTM/algorithms.h"
 },
 {
     "arguments": [
@@ -693,7 +769,7 @@
         "-I",
         "C:\\Qt\\Tools\\QtCreator\\share\\qtcreator\\cplusplus\\wrappedQtHeaders\\QtCore",
         "-I",
-        "C:\\Users\\Tomáš\\AppData\\Local\\Temp\\QtCreator-hhIQCi\\clang-uiheader-poGBNA",
+        "C:\\Users\\Tomáš\\AppData\\Local\\Temp\\QtCreator-CCSZfV\\clang-uiheader-QDhPLs",
         "-nostdinc",
         "-nostdinc++",
         "-g",
@@ -718,7 +794,7 @@
         "-DQT_CORE_LIB",
         "-DQT_NEEDS_QMAIN",
         "-I",
-        "E:\\Tomas\\CPP\\adk_2022_23\\cv5\\DTM",
+        "E:\\Tomas\\CPP\\adk_old\\Ulohy\\ADK2022\\SK1\\adk_2022_23\\adk_ukol3\\DTM",
         "-I",
         "C:\\Qt\\6.2.1\\mingw81_64\\include",
         "-I",
@@ -754,10 +830,10 @@
         "-Wno-unknown-warning-option",
         "-Wno-documentation-unknown-command",
         "-fno-delayed-template-parsing",
-        "E:\\Tomas\\CPP\\adk_2022_23\\cv5\\DTM\\draw.h"
+        "E:\\Tomas\\CPP\\adk_old\\Ulohy\\ADK2022\\SK1\\adk_2022_23\\adk_ukol3\\DTM\\csv.h"
     ],
     "directory": "E:/Tomas/CPP/adk_2022_23/cv5/build-DTM-Desktop_Qt_6_2_1_MinGW_64_bit-Debug/.qtc_clangd",
-    "file": "E:/Tomas/CPP/adk_2022_23/cv5/DTM/draw.h"
+    "file": "E:/Tomas/CPP/adk_old/Ulohy/ADK2022/SK1/adk_2022_23/adk_ukol3/DTM/csv.h"
 },
 {
     "arguments": [
@@ -769,7 +845,7 @@
         "-I",
         "C:\\Qt\\Tools\\QtCreator\\share\\qtcreator\\cplusplus\\wrappedQtHeaders\\QtCore",
         "-I",
-        "C:\\Users\\Tomáš\\AppData\\Local\\Temp\\QtCreator-hhIQCi\\clang-uiheader-poGBNA",
+        "C:\\Users\\Tomáš\\AppData\\Local\\Temp\\QtCreator-CCSZfV\\clang-uiheader-QDhPLs",
         "-nostdinc",
         "-nostdinc++",
         "-g",
@@ -794,7 +870,7 @@
         "-DQT_CORE_LIB",
         "-DQT_NEEDS_QMAIN",
         "-I",
-        "E:\\Tomas\\CPP\\adk_2022_23\\cv5\\DTM",
+        "E:\\Tomas\\CPP\\adk_old\\Ulohy\\ADK2022\\SK1\\adk_2022_23\\adk_ukol3\\DTM",
         "-I",
         "C:\\Qt\\6.2.1\\mingw81_64\\include",
         "-I",
@@ -830,10 +906,10 @@
         "-Wno-unknown-warning-option",
         "-Wno-documentation-unknown-command",
         "-fno-delayed-template-parsing",
-        "E:\\Tomas\\CPP\\adk_2022_23\\cv5\\DTM\\edge.h"
+        "E:\\Tomas\\CPP\\adk_old\\Ulohy\\ADK2022\\SK1\\adk_2022_23\\adk_ukol3\\DTM\\draw.h"
     ],
     "directory": "E:/Tomas/CPP/adk_2022_23/cv5/build-DTM-Desktop_Qt_6_2_1_MinGW_64_bit-Debug/.qtc_clangd",
-    "file": "E:/Tomas/CPP/adk_2022_23/cv5/DTM/edge.h"
+    "file": "E:/Tomas/CPP/adk_old/Ulohy/ADK2022/SK1/adk_2022_23/adk_ukol3/DTM/draw.h"
 },
 {
     "arguments": [
@@ -845,7 +921,7 @@
         "-I",
         "C:\\Qt\\Tools\\QtCreator\\share\\qtcreator\\cplusplus\\wrappedQtHeaders\\QtCore",
         "-I",
-        "C:\\Users\\Tomáš\\AppData\\Local\\Temp\\QtCreator-hhIQCi\\clang-uiheader-poGBNA",
+        "C:\\Users\\Tomáš\\AppData\\Local\\Temp\\QtCreator-CCSZfV\\clang-uiheader-QDhPLs",
         "-nostdinc",
         "-nostdinc++",
         "-g",
@@ -870,7 +946,7 @@
         "-DQT_CORE_LIB",
         "-DQT_NEEDS_QMAIN",
         "-I",
-        "E:\\Tomas\\CPP\\adk_2022_23\\cv5\\DTM",
+        "E:\\Tomas\\CPP\\adk_old\\Ulohy\\ADK2022\\SK1\\adk_2022_23\\adk_ukol3\\DTM",
         "-I",
         "C:\\Qt\\6.2.1\\mingw81_64\\include",
         "-I",
@@ -906,10 +982,10 @@
         "-Wno-unknown-warning-option",
         "-Wno-documentation-unknown-command",
         "-fno-delayed-template-parsing",
-        "E:\\Tomas\\CPP\\adk_2022_23\\cv5\\DTM\\mainform.h"
+        "E:\\Tomas\\CPP\\adk_old\\Ulohy\\ADK2022\\SK1\\adk_2022_23\\adk_ukol3\\DTM\\edge.h"
     ],
     "directory": "E:/Tomas/CPP/adk_2022_23/cv5/build-DTM-Desktop_Qt_6_2_1_MinGW_64_bit-Debug/.qtc_clangd",
-    "file": "E:/Tomas/CPP/adk_2022_23/cv5/DTM/mainform.h"
+    "file": "E:/Tomas/CPP/adk_old/Ulohy/ADK2022/SK1/adk_2022_23/adk_ukol3/DTM/edge.h"
 },
 {
     "arguments": [
@@ -921,7 +997,7 @@
         "-I",
         "C:\\Qt\\Tools\\QtCreator\\share\\qtcreator\\cplusplus\\wrappedQtHeaders\\QtCore",
         "-I",
-        "C:\\Users\\Tomáš\\AppData\\Local\\Temp\\QtCreator-hhIQCi\\clang-uiheader-poGBNA",
+        "C:\\Users\\Tomáš\\AppData\\Local\\Temp\\QtCreator-CCSZfV\\clang-uiheader-QDhPLs",
         "-nostdinc",
         "-nostdinc++",
         "-g",
@@ -946,7 +1022,7 @@
         "-DQT_CORE_LIB",
         "-DQT_NEEDS_QMAIN",
         "-I",
-        "E:\\Tomas\\CPP\\adk_2022_23\\cv5\\DTM",
+        "E:\\Tomas\\CPP\\adk_old\\Ulohy\\ADK2022\\SK1\\adk_2022_23\\adk_ukol3\\DTM",
         "-I",
         "C:\\Qt\\6.2.1\\mingw81_64\\include",
         "-I",
@@ -982,10 +1058,10 @@
         "-Wno-unknown-warning-option",
         "-Wno-documentation-unknown-command",
         "-fno-delayed-template-parsing",
-        "E:\\Tomas\\CPP\\adk_2022_23\\cv5\\DTM\\qpoint3d.h"
+        "E:\\Tomas\\CPP\\adk_old\\Ulohy\\ADK2022\\SK1\\adk_2022_23\\adk_ukol3\\DTM\\mainform.h"
     ],
     "directory": "E:/Tomas/CPP/adk_2022_23/cv5/build-DTM-Desktop_Qt_6_2_1_MinGW_64_bit-Debug/.qtc_clangd",
-    "file": "E:/Tomas/CPP/adk_2022_23/cv5/DTM/qpoint3d.h"
+    "file": "E:/Tomas/CPP/adk_old/Ulohy/ADK2022/SK1/adk_2022_23/adk_ukol3/DTM/mainform.h"
 },
 {
     "arguments": [
@@ -997,7 +1073,7 @@
         "-I",
         "C:\\Qt\\Tools\\QtCreator\\share\\qtcreator\\cplusplus\\wrappedQtHeaders\\QtCore",
         "-I",
-        "C:\\Users\\Tomáš\\AppData\\Local\\Temp\\QtCreator-hhIQCi\\clang-uiheader-poGBNA",
+        "C:\\Users\\Tomáš\\AppData\\Local\\Temp\\QtCreator-CCSZfV\\clang-uiheader-QDhPLs",
         "-nostdinc",
         "-nostdinc++",
         "-g",
@@ -1022,7 +1098,7 @@
         "-DQT_CORE_LIB",
         "-DQT_NEEDS_QMAIN",
         "-I",
-        "E:\\Tomas\\CPP\\adk_2022_23\\cv5\\DTM",
+        "E:\\Tomas\\CPP\\adk_old\\Ulohy\\ADK2022\\SK1\\adk_2022_23\\adk_ukol3\\DTM",
         "-I",
         "C:\\Qt\\6.2.1\\mingw81_64\\include",
         "-I",
@@ -1058,10 +1134,10 @@
         "-Wno-unknown-warning-option",
         "-Wno-documentation-unknown-command",
         "-fno-delayed-template-parsing",
-        "E:\\Tomas\\CPP\\adk_2022_23\\cv5\\DTM\\settings.h"
+        "E:\\Tomas\\CPP\\adk_old\\Ulohy\\ADK2022\\SK1\\adk_2022_23\\adk_ukol3\\DTM\\qpoint3d.h"
     ],
     "directory": "E:/Tomas/CPP/adk_2022_23/cv5/build-DTM-Desktop_Qt_6_2_1_MinGW_64_bit-Debug/.qtc_clangd",
-    "file": "E:/Tomas/CPP/adk_2022_23/cv5/DTM/settings.h"
+    "file": "E:/Tomas/CPP/adk_old/Ulohy/ADK2022/SK1/adk_2022_23/adk_ukol3/DTM/qpoint3d.h"
 },
 {
     "arguments": [
@@ -1073,7 +1149,7 @@
         "-I",
         "C:\\Qt\\Tools\\QtCreator\\share\\qtcreator\\cplusplus\\wrappedQtHeaders\\QtCore",
         "-I",
-        "C:\\Users\\Tomáš\\AppData\\Local\\Temp\\QtCreator-hhIQCi\\clang-uiheader-poGBNA",
+        "C:\\Users\\Tomáš\\AppData\\Local\\Temp\\QtCreator-CCSZfV\\clang-uiheader-QDhPLs",
         "-nostdinc",
         "-nostdinc++",
         "-g",
@@ -1098,7 +1174,7 @@
         "-DQT_CORE_LIB",
         "-DQT_NEEDS_QMAIN",
         "-I",
-        "E:\\Tomas\\CPP\\adk_2022_23\\cv5\\DTM",
+        "E:\\Tomas\\CPP\\adk_old\\Ulohy\\ADK2022\\SK1\\adk_2022_23\\adk_ukol3\\DTM",
         "-I",
         "C:\\Qt\\6.2.1\\mingw81_64\\include",
         "-I",
@@ -1134,10 +1210,10 @@
         "-Wno-unknown-warning-option",
         "-Wno-documentation-unknown-command",
         "-fno-delayed-template-parsing",
-        "E:\\Tomas\\CPP\\adk_2022_23\\cv5\\DTM\\triangle.h"
+        "E:\\Tomas\\CPP\\adk_old\\Ulohy\\ADK2022\\SK1\\adk_2022_23\\adk_ukol3\\DTM\\settings.h"
     ],
     "directory": "E:/Tomas/CPP/adk_2022_23/cv5/build-DTM-Desktop_Qt_6_2_1_MinGW_64_bit-Debug/.qtc_clangd",
-    "file": "E:/Tomas/CPP/adk_2022_23/cv5/DTM/triangle.h"
+    "file": "E:/Tomas/CPP/adk_old/Ulohy/ADK2022/SK1/adk_2022_23/adk_ukol3/DTM/settings.h"
 },
 {
     "arguments": [
@@ -1149,7 +1225,7 @@
         "-I",
         "C:\\Qt\\Tools\\QtCreator\\share\\qtcreator\\cplusplus\\wrappedQtHeaders\\QtCore",
         "-I",
-        "C:\\Users\\Tomáš\\AppData\\Local\\Temp\\QtCreator-hhIQCi\\clang-uiheader-poGBNA",
+        "C:\\Users\\Tomáš\\AppData\\Local\\Temp\\QtCreator-CCSZfV\\clang-uiheader-QDhPLs",
         "-nostdinc",
         "-nostdinc++",
         "-g",
@@ -1174,7 +1250,7 @@
         "-DQT_CORE_LIB",
         "-DQT_NEEDS_QMAIN",
         "-I",
-        "E:\\Tomas\\CPP\\adk_2022_23\\cv5\\DTM",
+        "E:\\Tomas\\CPP\\adk_old\\Ulohy\\ADK2022\\SK1\\adk_2022_23\\adk_ukol3\\DTM",
         "-I",
         "C:\\Qt\\6.2.1\\mingw81_64\\include",
         "-I",
@@ -1210,10 +1286,10 @@
         "-Wno-unknown-warning-option",
         "-Wno-documentation-unknown-command",
         "-fno-delayed-template-parsing",
-        "E:\\Tomas\\CPP\\adk_2022_23\\cv5\\build-DTM-Desktop_Qt_6_2_1_MinGW_64_bit-Debug\\ui_mainform.h"
+        "E:\\Tomas\\CPP\\adk_old\\Ulohy\\ADK2022\\SK1\\adk_2022_23\\adk_ukol3\\DTM\\triangle.h"
     ],
     "directory": "E:/Tomas/CPP/adk_2022_23/cv5/build-DTM-Desktop_Qt_6_2_1_MinGW_64_bit-Debug/.qtc_clangd",
-    "file": "E:/Tomas/CPP/adk_2022_23/cv5/build-DTM-Desktop_Qt_6_2_1_MinGW_64_bit-Debug/ui_mainform.h"
+    "file": "E:/Tomas/CPP/adk_old/Ulohy/ADK2022/SK1/adk_2022_23/adk_ukol3/DTM/triangle.h"
 },
 {
     "arguments": [
@@ -1225,7 +1301,7 @@
         "-I",
         "C:\\Qt\\Tools\\QtCreator\\share\\qtcreator\\cplusplus\\wrappedQtHeaders\\QtCore",
         "-I",
-        "C:\\Users\\Tomáš\\AppData\\Local\\Temp\\QtCreator-hhIQCi\\clang-uiheader-poGBNA",
+        "C:\\Users\\Tomáš\\AppData\\Local\\Temp\\QtCreator-CCSZfV\\clang-uiheader-QDhPLs",
         "-nostdinc",
         "-nostdinc++",
         "-g",
@@ -1250,7 +1326,7 @@
         "-DQT_CORE_LIB",
         "-DQT_NEEDS_QMAIN",
         "-I",
-        "E:\\Tomas\\CPP\\adk_2022_23\\cv5\\DTM",
+        "E:\\Tomas\\CPP\\adk_old\\Ulohy\\ADK2022\\SK1\\adk_2022_23\\adk_ukol3\\DTM",
         "-I",
         "C:\\Qt\\6.2.1\\mingw81_64\\include",
         "-I",
@@ -1290,5 +1366,81 @@
     ],
     "directory": "E:/Tomas/CPP/adk_2022_23/cv5/build-DTM-Desktop_Qt_6_2_1_MinGW_64_bit-Debug/.qtc_clangd",
     "file": "E:/Tomas/CPP/adk_2022_23/cv5/build-DTM-Desktop_Qt_6_2_1_MinGW_64_bit-Debug/ui_settings.h"
+},
+{
+    "arguments": [
+        "clang",
+        "-I",
+        "C:\\Qt\\Tools\\QtCreator\\share\\qtcreator\\cplusplus\\wrappedMingwHeaders",
+        "-I",
+        "C:\\Qt\\Tools\\QtCreator\\share\\qtcreator\\cplusplus\\wrappedQtHeaders",
+        "-I",
+        "C:\\Qt\\Tools\\QtCreator\\share\\qtcreator\\cplusplus\\wrappedQtHeaders\\QtCore",
+        "-I",
+        "C:\\Users\\Tomáš\\AppData\\Local\\Temp\\QtCreator-CCSZfV\\clang-uiheader-QDhPLs",
+        "-nostdinc",
+        "-nostdinc++",
+        "-g",
+        "-std=gnu++1z",
+        "-Wall",
+        "-Wextra",
+        "-Wextra",
+        "-fexceptions",
+        "-mthreads",
+        "-fsyntax-only",
+        "-m64",
+        "--target=x86_64-w64-mingw32",
+        "-DQ_CREATOR_RUN",
+        "-DUNICODE",
+        "-D_UNICODE",
+        "-DWIN32",
+        "-DMINGW_HAS_SECURE_API",
+        "-DQT_DEPRECATED_WARNINGS",
+        "-DQT_QML_DEBUG",
+        "-DQT_WIDGETS_LIB",
+        "-DQT_GUI_LIB",
+        "-DQT_CORE_LIB",
+        "-DQT_NEEDS_QMAIN",
+        "-I",
+        "E:\\Tomas\\CPP\\adk_old\\Ulohy\\ADK2022\\SK1\\adk_2022_23\\adk_ukol3\\DTM",
+        "-I",
+        "C:\\Qt\\6.2.1\\mingw81_64\\include",
+        "-I",
+        "C:\\Qt\\6.2.1\\mingw81_64\\include\\QtWidgets",
+        "-I",
+        "C:\\Qt\\6.2.1\\mingw81_64\\include\\QtGui",
+        "-I",
+        "C:\\Qt\\6.2.1\\mingw81_64\\include\\QtCore",
+        "-I",
+        "E:\\Tomas\\CPP\\adk_2022_23\\cv5\\build-DTM-Desktop_Qt_6_2_1_MinGW_64_bit-Debug\\debug",
+        "-I",
+        "E:\\Tomas\\CPP\\adk_2022_23\\cv5\\build-DTM-Desktop_Qt_6_2_1_MinGW_64_bit-Debug",
+        "-I",
+        "C:\\Qt\\6.2.1\\mingw81_64\\mkspecs\\win32-g++",
+        "-isystem",
+        "C:\\Qt\\Tools\\mingw810_64\\lib\\gcc\\x86_64-w64-mingw32\\8.1.0\\include\\c++",
+        "-isystem",
+        "C:\\Qt\\Tools\\mingw810_64\\lib\\gcc\\x86_64-w64-mingw32\\8.1.0\\include\\c++\\x86_64-w64-mingw32",
+        "-isystem",
+        "C:\\Qt\\Tools\\mingw810_64\\lib\\gcc\\x86_64-w64-mingw32\\8.1.0\\include\\c++\\backward",
+        "-isystem",
+        "C:\\Qt\\Tools\\QtCreator\\bin\\clang\\lib\\clang\\14.0.0\\include",
+        "-isystem",
+        "C:\\Qt\\Tools\\mingw810_64\\x86_64-w64-mingw32\\include",
+        "-fmessage-length=0",
+        "-fdiagnostics-show-note-include-stack",
+        "-fretain-comments-from-system-headers",
+        "-fmacro-backtrace-limit=0",
+        "-ferror-limit=1000",
+        "-x",
+        "c++-header",
+        "-Wno-unknown-pragmas",
+        "-Wno-unknown-warning-option",
+        "-Wno-documentation-unknown-command",
+        "-fno-delayed-template-parsing",
+        "E:\\Tomas\\CPP\\adk_2022_23\\cv5\\build-DTM-Desktop_Qt_6_2_1_MinGW_64_bit-Debug\\ui_mainform.h"
+    ],
+    "directory": "E:/Tomas/CPP/adk_2022_23/cv5/build-DTM-Desktop_Qt_6_2_1_MinGW_64_bit-Debug/.qtc_clangd",
+    "file": "E:/Tomas/CPP/adk_2022_23/cv5/build-DTM-Desktop_Qt_6_2_1_MinGW_64_bit-Debug/ui_mainform.h"
 }
 ]

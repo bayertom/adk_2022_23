@@ -1,4 +1,5 @@
 release/algorithms.o
+release/csv.o
 release/draw.o
 release/edge.o
 release/main.o

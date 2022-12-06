@@ -34,6 +34,7 @@ public:
     QAction *actionAnalyze_aspect;
     QAction *action_2;
     QAction *actionAbout;
+    QAction *actionClear_all;
     QWidget *centralwidget;
     QVBoxLayout *verticalLayout;
     Draw *Canvas;
@@ -87,6 +88,11 @@ public:
         action_2->setIcon(icon6);
         actionAbout = new QAction(MainForm);
         actionAbout->setObjectName(QString::fromUtf8("actionAbout"));
+        actionClear_all = new QAction(MainForm);
+        actionClear_all->setObjectName(QString::fromUtf8("actionClear_all"));
+        QIcon icon7;
+        icon7.addFile(QString::fromUtf8("icons/bin.png"), QSize(), QIcon::Normal, QIcon::Off);
+        actionClear_all->setIcon(icon7);
         centralwidget = new QWidget(MainForm);
         centralwidget->setObjectName(QString::fromUtf8("centralwidget"));
         verticalLayout = new QVBoxLayout(centralwidget);
@@ -104,7 +110,7 @@ public:
         MainForm->setCentralWidget(centralwidget);
         menubar = new QMenuBar(MainForm);
         menubar->setObjectName(QString::fromUtf8("menubar"));
-        menubar->setGeometry(QRect(0, 0, 1155, 21));
+        menubar->setGeometry(QRect(0, 0, 1155, 22));
         menuFile = new QMenu(menubar);
         menuFile->setObjectName(QString::fromUtf8("menuFile"));
         menuAnalyze = new QMenu(menubar);
@@ -142,6 +148,8 @@ public:
         toolBar->addAction(actionAnalyze_aspect);
         toolBar->addSeparator();
         toolBar->addAction(action_2);
+        toolBar->addSeparator();
+        toolBar->addAction(actionClear_all);
 
         retranslateUi(MainForm);
 
@@ -189,6 +197,7 @@ public:
 #if QT_CONFIG(tooltip)
         actionAbout->setToolTip(QCoreApplication::translate("MainForm", "About the software", nullptr));
 #endif // QT_CONFIG(tooltip)
+        actionClear_all->setText(QCoreApplication::translate("MainForm", "Clear all", nullptr));
         menuFile->setTitle(QCoreApplication::translate("MainForm", "File", nullptr));
         menuAnalyze->setTitle(QCoreApplication::translate("MainForm", "Analyze", nullptr));
         menuOptions->setTitle(QCoreApplication::translate("MainForm", "Settings", nullptr));

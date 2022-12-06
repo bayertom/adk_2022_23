@@ -7,7 +7,7 @@
 *****************************************************************************/
 
 #include <memory>
-#include "../../DTM/settings.h"
+#include "../../../../adk_old/Ulohy/ADK2022/SK1/adk_2022_23/adk_ukol3/DTM/settings.h"
 #include <QtCore/qbytearray.h>
 #include <QtCore/qmetatype.h>
 #if !defined(Q_MOC_OUTPUT_REVISION)
