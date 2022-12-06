@@ -15,6 +15,12 @@ public:
     MainForm(QWidget *parent = nullptr);
     ~MainForm();
 
+private slots:
+
+    void on_actionElement_barrier_changed();
+
+    void on_actionDisplace_triggered();
+
 private:
     Ui::MainForm *ui;
 };

@@ -11,12 +11,12 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>MainForm</string>
+   <string>Energy minimizing splines</string>
   </property>
   <widget class="QWidget" name="centralwidget">
    <layout class="QHBoxLayout" name="horizontalLayout">
     <item>
-     <widget class="QWidget" name="Canvas" native="true"/>
+     <widget class="Draw" name="Canvas" native="true"/>
     </item>
    </layout>
   </widget>
@@ -40,6 +40,8 @@
     <property name="title">
      <string>Simplify</string>
     </property>
+    <addaction name="actionElement_barrier"/>
+    <addaction name="separator"/>
     <addaction name="actionDisplace"/>
     <addaction name="separator"/>
     <addaction name="actionSettings"/>
@@ -74,7 +76,23 @@
     <string>Settings</string>
    </property>
   </action>
+  <action name="actionElement_barrier">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Element/barrier</string>
+   </property>
+  </action>
  </widget>
+ <customwidgets>
+  <customwidget>
+   <class>Draw</class>
+   <extends>QWidget</extends>
+   <header>draw.h</header>
+   <container>1</container>
+  </customwidget>
+ </customwidgets>
  <resources/>
  <connections/>
 </ui>

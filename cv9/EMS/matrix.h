@@ -20,7 +20,7 @@ private:
 
 public:
     //Matrix() : rows_count (1), columns_count (1), items ( 1, std::vector ( 1, 0.0 ) ) {};
-    Matrix ( const unsigned int rows_count_, const unsigned int columns_count_, const double item = 0 ) : rows_count ( rows_count_ ), columns_count ( columns_count_ ), items ( rows_count_, std::vector ( columns_count_, item ) ) {}
+    Matrix ( const unsigned int rows_count_, const unsigned int columns_count_, const double item = 0 ) : rows_count ( rows_count_ ), columns_count ( columns_count_ ), items ( rows_count_, std::vector <double> ( columns_count_, item ) ) {}
     Matrix ( const unsigned int rows_count_, const unsigned int columns_count_, const double non_diag_item_val, const double diag_val );
 
 public:

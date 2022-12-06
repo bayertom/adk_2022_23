@@ -19,6 +19,7 @@
 #include <QtWidgets/QStatusBar>
 #include <QtWidgets/QToolBar>
 #include <QtWidgets/QWidget>
+#include "draw.h"
 
 QT_BEGIN_NAMESPACE
 
@@ -28,9 +29,10 @@ public:
     QAction *actionOpen;
     QAction *actionDisplace;
     QAction *actionSettings;
+    QAction *actionElement_barrier;
     QWidget *centralwidget;
     QHBoxLayout *horizontalLayout;
-    QWidget *Canvas;
+    Draw *Canvas;
     QMenuBar *menubar;
     QMenu *menuFile;
     QMenu *menuSimplify;
@@ -48,11 +50,14 @@ public:
         actionDisplace->setObjectName(QString::fromUtf8("actionDisplace"));
         actionSettings = new QAction(MainForm);
         actionSettings->setObjectName(QString::fromUtf8("actionSettings"));
+        actionElement_barrier = new QAction(MainForm);
+        actionElement_barrier->setObjectName(QString::fromUtf8("actionElement_barrier"));
+        actionElement_barrier->setCheckable(true);
         centralwidget = new QWidget(MainForm);
         centralwidget->setObjectName(QString::fromUtf8("centralwidget"));
         horizontalLayout = new QHBoxLayout(centralwidget);
         horizontalLayout->setObjectName(QString::fromUtf8("horizontalLayout"));
-        Canvas = new QWidget(centralwidget);
+        Canvas = new Draw(centralwidget);
         Canvas->setObjectName(QString::fromUtf8("Canvas"));
 
         horizontalLayout->addWidget(Canvas);
@@ -77,6 +82,8 @@ public:
         menubar->addAction(menuSimplify->menuAction());
         menuFile->addAction(actionOpen);
         menuFile->addSeparator();
+        menuSimplify->addAction(actionElement_barrier);
+        menuSimplify->addSeparator();
         menuSimplify->addAction(actionDisplace);
         menuSimplify->addSeparator();
         menuSimplify->addAction(actionSettings);
@@ -88,10 +95,11 @@ public:
 
     void retranslateUi(QMainWindow *MainForm)
     {
-        MainForm->setWindowTitle(QCoreApplication::translate("MainForm", "MainForm", nullptr));
+        MainForm->setWindowTitle(QCoreApplication::translate("MainForm", "Energy minimizing splines", nullptr));
         actionOpen->setText(QCoreApplication::translate("MainForm", "Open", nullptr));
         actionDisplace->setText(QCoreApplication::translate("MainForm", "Displace", nullptr));
         actionSettings->setText(QCoreApplication::translate("MainForm", "Settings", nullptr));
+        actionElement_barrier->setText(QCoreApplication::translate("MainForm", "Element/barrier", nullptr));
         menuFile->setTitle(QCoreApplication::translate("MainForm", "File", nullptr));
         menuSimplify->setTitle(QCoreApplication::translate("MainForm", "Simplify", nullptr));
         toolBar->setWindowTitle(QCoreApplication::translate("MainForm", "toolBar", nullptr));
