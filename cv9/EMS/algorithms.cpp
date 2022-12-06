@@ -41,8 +41,8 @@ std::tuple<double, double, double> Algorithms::getPointLineSegmentDistance(doubl
     double uy = y2 - y1;
 
     // Normal vector
-    double nx = uy;
-    double ny = -ux;
+    double nx = -uy;
+    double ny = ux;
 
     //Supplementary point P3, P4
     double x3 = x1 + nx;
@@ -59,8 +59,9 @@ std::tuple<double, double, double> Algorithms::getPointLineSegmentDistance(doubl
     if (crit < 0)
     {
         auto [d, xi, yi] = getPointLineDistance(x, y, x1, y1, x2, y2);
-        return {d, xi, yi};
+        return {fabs(d), xi, yi};
     }
+
     // Point Q left from P1, P3
     if (dqp13 > 0)
         return {getEuclDistance(x, y, x1, y1), x1, y1};
@@ -80,7 +81,7 @@ std::tuple<int, double, double, double> Algorithms::getNearestLineSegmentPoint(d
     auto [m,n] = X.size();
 
     //Browse all points
-    for (int i = 0; i < m; i++)
+    for (int i = 0; i < m - 1; i++)
     {
         //Compute distance
         auto [d, xi, yi] = getPointLineSegmentDistance(xq, yq, X(i, 0), Y(i, 0), X(i+1, 0), Y(i+1, 0));
@@ -94,6 +95,7 @@ std::tuple<int, double, double, double> Algorithms::getNearestLineSegmentPoint(d
                 yn = yi;
         }
     }
+
     return {imin, dmin, xn, yn};
 }
 
@@ -130,6 +132,7 @@ Matrix Algorithms::createA(double alfa, double beta, double gamma, double h, int
             A(i+2,i) = c;
         }
     }
+
     return A;
 }
 
@@ -144,27 +147,27 @@ std::vector<QPointF> Algorithms::minEnergySpline1Element1Barrier(std::vector<QPo
     Matrix Xe(ne,1), Ye(ne,1);
     Matrix Xb(nb,1), Yb(nb,1);
 
-    //Initaliaze Xe, Ye matrices
+    //Convert polyline representation into Xe, Ye matrices
     for(int i = 0; i<ne; i++)
     {
         Xe(i,0)=element[i].x();
         Ye(i,0)=element[i].y();
     }
 
-    //Initaliaze Xb, Yb matrices
+    //Convert polyline representation into  Xb, Yb matrices
     for(int i = 0; i<nb; i++)
     {
         Xb(i,0)=barrier[i].x();
         Yb(i,0)=barrier[i].y();
     }
 
-    // Coordinate differencies and step
+    //Coordinate differencies and step
     Matrix hX = Xe.diff();
     Matrix hY = Ye.diff();
-    Matrix hXY = (hX|hX + hY|hY).sqrtm(); //Hadamard product .*
+    Matrix hXY = ((hX|hX) + (hY|hY)).sqrtm(); //Hadamard product .*
     double h = hXY.mean();
 
-    //create matrix A
+    //Create matrix A
     Matrix A = createA(alfa, beta, gamma, h, ne);
 
     //Create inverse matrix
@@ -179,36 +182,36 @@ std::vector<QPointF> Algorithms::minEnergySpline1Element1Barrier(std::vector<QPo
 
     for(int i=0; i < iter; i++)
     {
-        // Outer energy matrices
+        //Outer energy matrices
         Matrix Ex(ne,1), Ey(ne,1);
 
-        // Partial derivatives of energy according to X, Y
+        //Partial derivatives of energy according to X, Y
         for(int j=1; j < ne-1; j++)
         {
-            // Point nearest to Xej, Yej in Xb, Yb
-            auto[in, xn, yn, dn]=getNearestLineSegmentPoint(Xei(j,0), Yei(j,0), Xb, Yb);
+            //Point nearest to Xej, Yej in Xb, Yb
+            auto[in, dn, xn, yn]=getNearestLineSegmentPoint(Xei(j,0), Yei(j,0), Xb, Yb);
 
-            // Partial derivative of energy accroding to x
+            //Partial derivative of energy accroding to x
             double ex = getEx(Xei(j,0), Yei(j,0), xn, yn, dmin);
 
-            // Partial derivative of energy accroding to y
+            //Partial derivative of energy accroding to y
             double ey = getEy(Xei(j,0), Yei(j,0), xn, yn, dmin);
 
-            // Set derivatives to energy matrices
+            //Set derivatives to energy matrices
             Ex(j,0)=ex;
             Ey(j,0)=ey;
         }
 
-        // Compute shifts
+        //Compute shifts
         DXe = AI*(lambda*DXe-Ex);
         DYe = AI*(lambda*DYe-Ey);
 
-        // New vertices
+        //New vertices
         Xei = Xe + DXe;
         Yei = Ye + DYe;
     }
 
-    // Convert matrix representations into polyline
+    //Convert matrix representation into polyline
     std::vector<QPointF>displaced;
     for(int i=0; i<ne; i++)
     {
@@ -222,8 +225,8 @@ std::vector<QPointF> Algorithms::minEnergySpline1Element1Barrier(std::vector<QPo
 
 double Algorithms::getEx(double x, double y, double xn, double yn, double dmin)
 {
-    // Partial derivative according of outer energy to x
-    double c = 2*dmin;
+    //Partial derivative according of outer energy to x
+    double c = 20*dmin;
 
     double d = getEuclDistance(x,y,xn,yn);
 
@@ -237,7 +240,7 @@ double Algorithms::getEx(double x, double y, double xn, double yn, double dmin)
 double Algorithms::getEy(double x, double y, double xn, double yn, double dmin)
 {
     // Partial derivative according of outer energy to x
-    double c = 2*dmin;
+    double c = 20*dmin;
 
     double d = getEuclDistance(x,y,xn,yn);
 

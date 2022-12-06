@@ -17,9 +17,9 @@ public:
 
 private slots:
 
-    void on_actionElement_barrier_changed();
-
     void on_actionDisplace_triggered();
+
+    void on_actionElement_Barrier_changed();
 
 private:
     Ui::MainForm *ui;

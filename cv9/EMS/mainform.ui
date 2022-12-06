@@ -26,7 +26,7 @@
      <x>0</x>
      <y>0</y>
      <width>1217</width>
-     <height>21</height>
+     <height>26</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuFile">
@@ -40,13 +40,19 @@
     <property name="title">
      <string>Simplify</string>
     </property>
-    <addaction name="actionElement_barrier"/>
     <addaction name="separator"/>
     <addaction name="actionDisplace"/>
     <addaction name="separator"/>
     <addaction name="actionSettings"/>
    </widget>
+   <widget class="QMenu" name="menuInput">
+    <property name="title">
+     <string>Input</string>
+    </property>
+    <addaction name="actionElement_Barrier"/>
+   </widget>
    <addaction name="menuFile"/>
+   <addaction name="menuInput"/>
    <addaction name="menuSimplify"/>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
@@ -76,12 +82,12 @@
     <string>Settings</string>
    </property>
   </action>
-  <action name="actionElement_barrier">
+  <action name="actionElement_Barrier">
    <property name="checkable">
     <bool>true</bool>
    </property>
    <property name="text">
-    <string>Element/barrier</string>
+    <string>Element/Barrier</string>
    </property>
   </action>
  </widget>
@@ -89,7 +95,7 @@
   <customwidget>
    <class>Draw</class>
    <extends>QWidget</extends>
-   <header>draw.h</header>
+   <header location="global">draw.h</header>
    <container>1</container>
   </customwidget>
  </customwidgets>

@@ -15,14 +15,6 @@ MainForm::~MainForm()
 }
 
 
-
-
-void MainForm::on_actionElement_barrier_changed()
-{
-    //Change drawn element
-    ui->Canvas->switchDrawnElement();
-}
-
 void MainForm::on_actionDisplace_triggered()
 {
     //Run displacement
@@ -35,7 +27,7 @@ void MainForm::on_actionDisplace_triggered()
     double beta = 1000;
     double gamma = 1000;
     double lambda = 20;
-    int iter = 100;
+    int iter = 500;
 
     //Run displacement
     Algorithms a;
@@ -46,3 +38,11 @@ void MainForm::on_actionDisplace_triggered()
 
     repaint();
 }
+
+
+void MainForm::on_actionElement_Barrier_changed()
+{
+    //Change drawn element
+    ui->Canvas->switchDrawnElement();
+}
+
