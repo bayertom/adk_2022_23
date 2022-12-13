@@ -9,7 +9,7 @@ class Draw : public QWidget
 
 private:
     bool draw_element;
-    std::vector<QPointF>element, barrier, displaced;
+    std::vector<QPointF>element, barrier, displaced, displaced2;
 
 
 public:
@@ -23,6 +23,7 @@ public:
     void setElement(std::vector<QPointF> &element_){element=element_;}
     void setBarrier(std::vector<QPointF> &barrier_){barrier=barrier_;}
     void setDisplaced(std::vector<QPointF> &displaced_){displaced=displaced_;}
+    void setDisplaced2(std::vector<QPointF> &displaced2_){displaced2=displaced2_;}
 signals:
 
 public slots:

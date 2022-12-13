@@ -55,6 +55,11 @@ void Draw::paintEvent(QPaintEvent *event)
     for(int i =0; (i < displaced.size()-1) && (displaced.size() > 1); i++)
         painter.drawLine(displaced[i].x(),displaced[i].y(),displaced[i+1].x(),displaced[i+1].y());
 
+    // Draw displaced2
+    painter.setPen(Qt::yellow);
+    for(int i =0; (i < displaced2.size()-1) && (displaced2.size() > 1); i++)
+        painter.drawLine(displaced2[i].x(),displaced2[i].y(),displaced2[i+1].x(),displaced2[i+1].y());
+
     // End draw
     painter.end();
 }

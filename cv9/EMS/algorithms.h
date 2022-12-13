@@ -14,6 +14,7 @@ public:
     std::tuple<int, double, double, double> getNearestLineSegmentPoint(double xq, double yq, Matrix &X, Matrix &Y);
     Matrix createA(double alfa, double beta, double gamma, double h, int n);
     std::vector<QPointF> minEnergySpline1Element1Barrier(std::vector<QPointF> element,std::vector<QPointF> barrier, double alfa, double beta, double gamma, double lambda, double dmin, int iter);
+    std::tuple<std::vector<QPointF>,std::vector<QPointF>> minEnergySpline2Elements(std::vector<QPointF> element1,std::vector<QPointF> element2, double alfa, double beta, double gamma, double lambda, double dmin, int iter);
     double getEx(double x, double y, double xn, double yn, double dmin);
     double getEy(double x, double y, double xn, double yn, double dmin);
 

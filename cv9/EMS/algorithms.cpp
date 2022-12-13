@@ -179,8 +179,9 @@ std::vector<QPointF> Algorithms::minEnergySpline1Element1Barrier(std::vector<QPo
 
     //Main iteration    
     Matrix Xei = Xe , Yei = Ye;
+    double dx = 0, dy = 0;
 
-    for(int i=0; i < iter; i++)
+    do
     {
         //Outer energy matrices
         Matrix Ex(ne,1), Ey(ne,1);
@@ -209,7 +210,14 @@ std::vector<QPointF> Algorithms::minEnergySpline1Element1Barrier(std::vector<QPo
         //New vertices
         Xei = Xe + DXe;
         Yei = Ye + DYe;
-    }
+
+        //Maximum shifts
+        auto [dxe, i1, j1] = DXe.max();
+        auto [dye, i2, j2] = DYe.max();
+        dx = dxe;
+        dy = dye;
+
+    }  while(dx> 1 || dy > 1);
 
     //Convert matrix representation into polyline
     std::vector<QPointF>displaced;
@@ -220,6 +228,129 @@ std::vector<QPointF> Algorithms::minEnergySpline1Element1Barrier(std::vector<QPo
     }
 
     return displaced;
+}
+
+std::tuple<std::vector<QPointF>,std::vector<QPointF>>Algorithms::minEnergySpline2Elements(std::vector<QPointF> element1,std::vector<QPointF> element2, double alfa, double beta, double gamma, double lambda, double dmin, int iter)
+{    //Create minimum energy spline: 2 simplified elements
+    int n1 = element1.size();
+    int n2 = element2.size();
+
+    //Create supplementary matrices
+    Matrix X1e(n1,1), Y1e(n1,1);
+    Matrix X2e(n2,1), Y2e(n2,1);
+
+    //Convert polyline representation into Xe, Ye matrices
+    for(int i = 0; i<n1; i++)
+    {
+        X1e(i,0)=element1[i].x();
+        Y1e(i,0)=element1[i].y();
+    }
+
+    //Convert polyline representation into  Xb, Yb matrices
+    for(int i = 0; i<n2; i++)
+    {
+        X2e(i,0)=element2[i].x();
+        Y2e(i,0)=element2[i].y();
+    }
+
+    //Coordinate differencies and step
+    Matrix h1X = X1e.diff();
+    Matrix h1Y = Y1e.diff();
+    Matrix h1XY = ((h1X|h1X) + (h1Y|h1Y)).sqrtm(); //Hadamard product .*
+    double h1 = h1XY.mean();
+
+    //Coordinate differencies and step
+    Matrix h2X = X2e.diff();
+    Matrix h2Y = Y2e.diff();
+    Matrix h2XY = ((h2X|h2X) + (h2Y|h2Y)).sqrtm(); //Hadamard product .*
+    double h2 = h2XY.mean();
+
+    //Create matrices A1 and A2
+    Matrix A1 = createA(alfa, beta, gamma, h1, n1);
+    Matrix A2 = createA(alfa, beta, gamma, h2, n2);
+
+
+    //Create inverse matrices A1I and A2I
+    Matrix I1(n1,n1,0,1);
+    Matrix A1I = (A1 + lambda * I1).inv();
+    Matrix I2(n2,n2,0,1);
+    Matrix A2I = (A2 + lambda * I2).inv();
+
+    // Coordinate differencies
+    Matrix DX1e(n1,1), DY1e(n1,1);
+    Matrix DX2e(n2,1), DY2e(n2,1);
+
+
+    //Main iteration
+    Matrix X1ei = X1e , Y1ei = Y1e;
+    Matrix X2ei = X2e , Y2ei = Y2e;
+
+
+    for(int i=0; i < iter; i++)
+    {
+        //Outer energy matrices
+        Matrix E1x(n1,1), E1y(n1,1), E2x(n2,1), E2y(n2,1);
+
+        //Partial derivatives of energy according to X, Y
+        for(int j=1; j < n1-1; j++)
+        {
+            //Point nearest to Xej, Yej in Xb, Yb
+            auto[in, dn, xn, yn]=getNearestLineSegmentPoint(X1ei(j,0), Y1ei(j,0), X2ei, Y2ei);
+
+            //Partial derivative of energy accroding to x
+            double ex = getEx(X1ei(j,0), Y1ei(j,0), xn, yn, dmin);
+
+            //Partial derivative of energy accroding to y
+            double ey = getEy(X1ei(j,0), Y1ei(j,0), xn, yn, dmin);
+
+            //Set derivatives to energy matrices
+            E1x(j,0)=ex;
+            E1y(j,0)=ey;
+        }
+        for(int j=1; j < n2-1; j++)
+         {
+            //Point nearest to Xej, Yej in Xb, Yb
+            auto[in, dn, xn, yn]=getNearestLineSegmentPoint(X2ei(j,0), Y2ei(j,0), X1ei, Y1ei);
+
+            //Partial derivative of energy accroding to x
+            double ex = getEx(X2ei(j,0), Y2ei(j,0), xn, yn, dmin);
+
+            //Partial derivative of energy accroding to y
+            double ey = getEy(X2ei(j,0), Y2ei(j,0), xn, yn, dmin);
+
+            //Set derivatives to energy matrices
+            E2x(j,0)=ex;
+            E2y(j,0)=ey;
+        }
+
+        //Compute shifts
+        DX1e = A1I*(lambda*DX1e-E1x);
+        DY1e = A1I*(lambda*DY1e-E1y);
+        DX2e = A2I*(lambda*DX2e-E2x);
+        DY2e = A2I*(lambda*DY2e-E2y);
+
+        //New vertices
+        X1ei = X1e + DX1e;
+        Y1ei = Y1e + DY1e;
+        X2ei = X2e + DX2e;
+        Y2ei = Y2e + DY2e;
+    }
+
+    //Convert matrix representation into polyline
+    std::vector<QPointF>displaced1, displaced2;
+    for(int i=0; i<n1; i++)
+    {
+        QPointF p(X1ei(i,0),Y1ei(i,0));
+        displaced1.push_back(p);
+    }
+
+    for(int i=0; i<n2; i++)
+    {
+        QPointF p(X2ei(i,0),Y2ei(i,0));
+        displaced2.push_back(p);
+    }
+
+    return {displaced1, displaced2};
 }
 
 

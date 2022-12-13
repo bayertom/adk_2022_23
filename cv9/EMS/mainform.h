@@ -21,6 +21,8 @@ private slots:
 
     void on_actionElement_Barrier_changed();
 
+    void on_actionDisplace_2_elements_triggered();
+
 private:
     Ui::MainForm *ui;
 };
